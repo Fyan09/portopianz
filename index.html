@@ -434,8 +434,34 @@ footer a:hover { color: white; }
 .section-cta { position: relative; z-index: 1; display: flex; gap: 1rem; justify-content: flex-end; flex-wrap: wrap; padding: 0 3rem 3rem; max-width: 1200px; margin: 0 auto; }
 
 /* ====== REVEAL ====== */
-.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
-.reveal.visible { opacity: 1; transform: none; }
+.reveal {
+  opacity: 0;
+  filter: blur(5px);
+  transition: opacity 1s cubic-bezier(0.2, 0.8, 0.2, 1), 
+              transform 1s cubic-bezier(0.2, 0.8, 0.2, 1),
+              filter 0.8s ease;
+  will-change: transform, opacity;
+}
+
+/* Variasi arah masuk halaman/elemen */
+.reveal.fade-up {
+  transform: translateY(60px);
+}
+
+.reveal.fade-left {
+  transform: translateX(-60px);
+}
+
+.reveal.fade-right {
+  transform: translateX(60px);
+}
+
+/* Ketika elemen masuk ke layar saat di-scroll */
+.reveal.visible {
+  opacity: 1;
+  transform: translate(0, 0);
+  filter: blur(0);
+}
 
 /* ====== ANIMATIONS ====== */
 @keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
@@ -550,7 +576,7 @@ footer a:hover { color: white; }
 <!-- ====== ABOUT ====== -->
 <div class="section-divider"><p>→ About Me</p><span class="divider-scroll">scroll terus kebawah ↓</span></div>
 <section id="about">
-  <div class="section-header">
+  <div class="section-header reveal fade-up"></div>
     <div class="section-header-bg">ABOUT ME</div>
     <p class="section-eyebrow">Home / About</p>
     <h2>About Me</h2>
@@ -558,7 +584,7 @@ footer a:hover { color: white; }
   </div>
   <div class="content-wide">
     <div class="about-grid">
-      <aside class="sidebar">
+      <aside class="sidebar reveal fade-left">
         <div class="profile-photo">
         <img src="assets/fotowis.jpeg" alt="Achmad Sofyan Hakiki">
         </div>
@@ -574,7 +600,7 @@ footer a:hover { color: white; }
           <span class="tag">Networking</span><span class="tag">UI/UX</span><span class="tag">Admin</span>
         </div>
       </aside>
-      <main class="main-content">
+      <main class="main-content reveal fade-right">
         <div class="section-label">Bio</div>
         <p class="bio-text">
           Saya adalah <strong>lulusan Teknik Komputer</strong> Politeknik Negeri Jember tahun 2026 dengan passion kuat di bidang IoT, Networking, dan Web Development. Berpengalaman dalam membangun sistem monitoring terintegrasi secara real-time, mulai dari sisi hardware hingga implementasi aplikasi.<br><br>
@@ -609,14 +635,14 @@ footer a:hover { color: white; }
 <!-- ====== SKILLS ====== -->
 <div class="section-divider"><p>→ Skills</p><span class="divider-scroll">scroll terus kebawah ↓</span></div>
 <section id="skills">
-  <div class="section-header">
+  <div class="section-header reveal fade-up">
     <div class="section-header-bg">SKILLS</div>
     <p class="section-eyebrow">Home / Skills</p>
     <h2>Personal Skill</h2>
     <p>Kombinasi hard skill teknis dan soft skill interpersonal yang saya kuasai selama perjalanan akademik dan profesional.</p>
   </div>
   <div class="content">
-    <div class="section-label reveal">Hard Skill — Teknologi & Tools</div>
+    <div class="section-label reveal fade-up">Hard Skill — Teknologi & Tools</div>
 <div class="carousel-wrapper reveal">
   <div class="carousel-track">
     <!-- Set 1 -->
@@ -649,7 +675,7 @@ footer a:hover { color: white; }
     <div class="skill-chip"><span class="skill-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" width="44" height="44"><rect width="44" height="44" rx="8" fill="#CC0000"/><text x="22" y="16" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="9" font-weight="900" fill="white">MikroTik</text><text x="22" y="30" text-anchor="middle" font-family="Arial,sans-serif" font-size="7" fill="rgba(255,255,255,0.8)">RouterOS</text></svg></span><div class="skill-name">MikroTik</div><div class="skill-type">Networking</div></div>
   </div>
 </div>
-    <div class="section-label reveal">Soft Skill</div>
+    <div class="section-label reveal fade-right">Soft Skill</div>
     <div class="soft-grid reveal">
     <div class="soft-card"><div class="soft-icon"><img src="assets/sepaking.jpg" alt="Public Speaking"></div><div class="soft-name">Public Speaking</div><div class="soft-desc">Terbiasa presentasi dan menjadi narasumber di berbagai acara kampus dan pelatihan.</div></div>
     <div class="soft-card"><div class="soft-icon"><img src="assets/berpikirkreatif.jpeg" alt="Berpikir Kreatif"></div><div class="soft-name">Berpikir Kreatif</div><div class="soft-desc">Mampu menghadirkan solusi inovatif untuk tantangan teknis maupun non-teknis.</div></div>
@@ -1020,6 +1046,26 @@ const counterObserver = new IntersectionObserver((entries) => {
 
 const achieveGrid = document.querySelector('.achieve-grid');
 if (achieveGrid) counterObserver.observe(achieveGrid);
+document.addEventListener("DOMContentLoaded", function () {
+  const revealOptions = {
+    threshold: 0.1,      // Animasi jalan ketika 10% elemen masuk layar
+    rootMargin: "0px 0px -60px 0px" // Memberikan ruang agar animasi tidak terlalu cepat terpicu
+  };
+
+  const scrollRevealObserver = new IntersectionObserver(function (entries, observer) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        // Hapus baris di bawah jika ingin animasi jalan terus setiap kali di-scroll ke atas-bawah
+        observer.unobserve(entry.target); 
+      }
+    });
+  }, revealOptions);
+
+  // Cari semua elemen yang dipasangi kelas .reveal lalu aktifkan observer-nya
+  const elementsToReveal = document.querySelectorAll(".reveal");
+  elementsToReveal.forEach(el => scrollRevealObserver.observe(el));
+});
 </script>
 </body>
 </html>
