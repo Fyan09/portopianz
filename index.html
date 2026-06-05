@@ -205,7 +205,15 @@ section { position: relative; z-index: 1; }
 }
 .skill-chip:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(74,94,42,0.15); }
 .skill-chip:hover::before { transform: scaleX(1); }
-.skill-icon { font-size: 2.2rem; margin-bottom: 8px; display: block; }
+.skill-icon {
+  width: 48px; height: 48px; margin: 0 auto 10px;
+  display: flex; align-items: center; justify-content: center;
+}
+.skill-icon img {
+  width: 44px; height: 44px; object-fit: contain;
+  transition: transform 0.3s;
+}
+.skill-chip:hover .skill-icon img { transform: scale(1.15); }
 .skill-name { font-size: 0.8rem; font-weight: 500; color: var(--charcoal); }
 .skill-type { font-size: 0.68rem; color: var(--text-muted); margin-top: 3px; }
 .skill-bars { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 4rem; }
@@ -217,7 +225,15 @@ section { position: relative; z-index: 1; }
 .soft-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
 .soft-card { background: var(--olive-dark); color: white; border-radius: 16px; padding: 1.5rem; display: flex; flex-direction: column; gap: 8px; transition: transform 0.25s; }
 .soft-card:hover { transform: translateY(-4px); }
-.soft-icon { font-size: 1.8rem; }
+.soft-icon {
+  width: 100%; height: 120px; border-radius: 10px;
+  overflow: hidden; margin-bottom: 4px;
+}
+.soft-icon img {
+  width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.soft-card:hover .soft-icon img { transform: scale(1.08); }
 .soft-name { font-weight: 500; font-size: 1rem; }
 .soft-desc { font-size: 0.8rem; opacity: 0.6; line-height: 1.5; }
 
@@ -406,6 +422,35 @@ footer a:hover { color: white; }
   .exp-item { padding-left: 50px; }
   .section-cta { padding: 0 1.5rem 2rem; }
 }
+.carousel-wrapper {
+  overflow: hidden; position: relative; margin-bottom: 4rem;
+}
+.carousel-track {
+  display: flex; gap: 1.25rem;
+  animation: scrollLeft 25s linear infinite;
+  width: max-content;
+}
+/* carousel tetap jalan meski di-hover */
+
+@keyframes scrollLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.skill-chip {
+  background: white; border-radius: 16px; padding: 1.5rem 1.25rem;
+  text-align: center; min-width: 130px; flex-shrink: 0;
+  border: 1px solid var(--stone);
+  box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  transition: all 0.35s; cursor: default;
+  filter: grayscale(100%); opacity: 0.5;
+}
+.skill-chip:hover {
+  filter: grayscale(0%); opacity: 1;
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(74,94,42,0.15);
+  border-color: var(--olive);
+}
 </style>
 </head>
 <body>
@@ -521,38 +566,46 @@ footer a:hover { color: white; }
   </div>
   <div class="content">
     <div class="section-label reveal">Hard Skill — Teknologi & Tools</div>
-    <div class="skills-grid reveal">
-      <div class="skill-chip"><span class="skill-icon">⬛</span><div class="skill-name">Next.js</div><div class="skill-type">Framework</div></div>
-      <div class="skill-chip"><span class="skill-icon">🔴</span><div class="skill-name">CodeIgniter</div><div class="skill-type">PHP Framework</div></div>
-      <div class="skill-chip"><span class="skill-icon">⚛️</span><div class="skill-name">React</div><div class="skill-type">UI Library</div></div>
-      <div class="skill-chip"><span class="skill-icon">🌊</span><div class="skill-name">Tailwind</div><div class="skill-type">CSS Framework</div></div>
-      <div class="skill-chip"><span class="skill-icon">🔷</span><div class="skill-name">C++</div><div class="skill-type">Language</div></div>
-      <div class="skill-chip"><span class="skill-icon">🟨</span><div class="skill-name">JavaScript</div><div class="skill-type">Language</div></div>
-      <div class="skill-chip"><span class="skill-icon">🎨</span><div class="skill-name">Canva</div><div class="skill-type">Design</div></div>
-      <div class="skill-chip"><span class="skill-icon">⚡</span><div class="skill-name">Arduino</div><div class="skill-type">IoT</div></div>
-      <div class="skill-chip"><span class="skill-icon">🗄️</span><div class="skill-name">MySQL</div><div class="skill-type">Database</div></div>
-      <div class="skill-chip"><span class="skill-icon">📊</span><div class="skill-name">MS Office</div><div class="skill-type">Productivity</div></div>
-      <div class="skill-chip"><span class="skill-icon">🔗</span><div class="skill-name">Firebase</div><div class="skill-type">Cloud/IoT</div></div>
-      <div class="skill-chip"><span class="skill-icon">📱</span><div class="skill-name">Flutter</div><div class="skill-type">Mobile</div></div>
-    </div>
-    <div class="section-label reveal">Tingkat Kemampuan</div>
-    <div class="skill-bars reveal" id="skillBars">
-      <div class="skill-bar-item"><div class="skill-bar-header"><span class="skill-bar-name">Web Development (PHP/JS)</span><span class="skill-bar-pct">88%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="88"></div></div></div>
-      <div class="skill-bar-item"><div class="skill-bar-header"><span class="skill-bar-name">IoT & Embedded Systems</span><span class="skill-bar-pct">82%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="82"></div></div></div>
-      <div class="skill-bar-item"><div class="skill-bar-header"><span class="skill-bar-name">Mobile Development (Flutter)</span><span class="skill-bar-pct">78%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="78"></div></div></div>
-      <div class="skill-bar-item"><div class="skill-bar-header"><span class="skill-bar-name">UI/UX Design</span><span class="skill-bar-pct">75%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="75"></div></div></div>
-      <div class="skill-bar-item"><div class="skill-bar-header"><span class="skill-bar-name">Networking & Server</span><span class="skill-bar-pct">70%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="70"></div></div></div>
-      <div class="skill-bar-item"><div class="skill-bar-header"><span class="skill-bar-name">Data Management (Excel/Accurate)</span><span class="skill-bar-pct">85%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="85"></div></div></div>
-    </div>
+<div class="carousel-wrapper reveal">
+  <div class="carousel-track">
+    <!-- Set 1 -->
+    <div class="skill-chip"><span class="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="Next.js"></span><div class="skill-name">Next.js</div><div class="skill-type">Framework</div></div>
+    <div class="skill-chip"><span class="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/codeigniter/codeigniter-plain.svg" alt="CodeIgniter"></span><div class="skill-name">CodeIgniter</div><div class="skill-type">PHP Framework</div></div>
+    <div class="skill-chip"><span class="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React"></span><div class="skill-name">React</div><div class="skill-type">UI Library</div></div>
+    <div class="skill-chip"><span class="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind"></span><div class="skill-name">Tailwind</div><div class="skill-type">CSS Framework</div></div>
+    <div class="skill-chip"><span class="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++"></span><div class="skill-name">C++</div><div class="skill-type">Language</div></div>
+    <div class="skill-chip"><span class="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript"></span><div class="skill-name">JavaScript</div><div class="skill-type">Language</div></div>
+    <div class="skill-chip"><span class="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/canva/canva-original.svg" alt="Canva"></span><div class="skill-name">Canva</div><div class="skill-type">Design</div></div>
+    <div class="skill-chip"><span class="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" alt="Arduino"></span><div class="skill-name">Arduino</div><div class="skill-type">IoT</div></div>
+    <div class="skill-chip"><span class="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL"></span><div class="skill-name">MySQL</div><div class="skill-type">Database</div></div>
+    <div class="skill-chip"><span class="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg" alt="MS Office" style="filter:invert(0)"></span><div class="skill-name">MS Office</div><div class="skill-type">Productivity</div></div>
+    <div class="skill-chip"><span class="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase"></span><div class="skill-name">Firebase</div><div class="skill-type">Cloud/IoT</div></div>
+    <div class="skill-chip"><span class="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="Flutter"></span><div class="skill-name">Flutter</div><div class="skill-type">Mobile</div></div>
+    <div class="skill-chip"><span class="skill-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" width="44" height="44"><rect width="44" height="44" rx="8" fill="#CC0000"/><text x="22" y="16" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="9" font-weight="900" fill="white">MikroTik</text><text x="22" y="30" text-anchor="middle" font-family="Arial,sans-serif" font-size="7" fill="rgba(255,255,255,0.8)">RouterOS</text></svg></span><div class="skill-name">MikroTik</div><div class="skill-type">Networking</div></div>
+    <!-- Set 2 (duplikat biar looping mulus) -->
+    <div class="skill-chip"><span class="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" alt="Next.js"></span><div class="skill-name">Next.js</div><div class="skill-type">Framework</div></div>
+    <div class="skill-chip"><span class="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/codeigniter/codeigniter-plain.svg" alt="CodeIgniter"></span><div class="skill-name">CodeIgniter</div><div class="skill-type">PHP Framework</div></div>
+    <div class="skill-chip"><span class="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React"></span><div class="skill-name">React</div><div class="skill-type">UI Library</div></div>
+    <div class="skill-chip"><span class="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind"></span><div class="skill-name">Tailwind</div><div class="skill-type">CSS Framework</div></div>
+    <div class="skill-chip"><span class="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" alt="C++"></span><div class="skill-name">C++</div><div class="skill-type">Language</div></div>
+    <div class="skill-chip"><span class="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript"></span><div class="skill-name">JavaScript</div><div class="skill-type">Language</div></div>
+    <div class="skill-chip"><span class="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/canva/canva-original.svg" alt="Canva"></span><div class="skill-name">Canva</div><div class="skill-type">Design</div></div>
+    <div class="skill-chip"><span class="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/arduino/arduino-original.svg" alt="Arduino"></span><div class="skill-name">Arduino</div><div class="skill-type">IoT</div></div>
+    <div class="skill-chip"><span class="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg" alt="MySQL"></span><div class="skill-name">MySQL</div><div class="skill-type">Database</div></div>
+    <div class="skill-chip"><span class="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/microsoftsqlserver/microsoftsqlserver-plain.svg" alt="MS Office"></span><div class="skill-name">MS Office</div><div class="skill-type">Productivity</div></div>
+    <div class="skill-chip"><span class="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" alt="Firebase"></span><div class="skill-name">Firebase</div><div class="skill-type">Cloud/IoT</div></div>
+    <div class="skill-chip"><span class="skill-icon"><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/flutter/flutter-original.svg" alt="Flutter"></span><div class="skill-name">Flutter</div><div class="skill-type">Mobile</div></div>
+    <div class="skill-chip"><span class="skill-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" width="44" height="44"><rect width="44" height="44" rx="8" fill="#CC0000"/><text x="22" y="16" text-anchor="middle" font-family="Arial Black,sans-serif" font-size="9" font-weight="900" fill="white">MikroTik</text><text x="22" y="30" text-anchor="middle" font-family="Arial,sans-serif" font-size="7" fill="rgba(255,255,255,0.8)">RouterOS</text></svg></span><div class="skill-name">MikroTik</div><div class="skill-type">Networking</div></div>
+  </div>
+</div>
     <div class="section-label reveal">Soft Skill</div>
     <div class="soft-grid reveal">
-      <div class="soft-card"><div class="soft-icon">🎤</div><div class="soft-name">Public Speaking</div><div class="soft-desc">Terbiasa presentasi dan menjadi narasumber di berbagai acara kampus dan pelatihan.</div></div>
-      <div class="soft-card"><div class="soft-icon">💡</div><div class="soft-name">Berpikir Kreatif</div><div class="soft-desc">Mampu menghadirkan solusi inovatif untuk tantangan teknis maupun non-teknis.</div></div>
-      <div class="soft-card"><div class="soft-icon">👥</div><div class="soft-name">Kepemimpinan</div><div class="soft-desc">Berpengalaman memimpin tim dan berkoordinasi dengan stakeholder proyek.</div></div>
-      <div class="soft-card"><div class="soft-icon">🤝</div><div class="soft-name">Kolaborasi</div><div class="soft-desc">Terbiasa bekerja dalam tim multidisiplin dengan komunikasi yang efektif.</div></div>
-      <div class="soft-card"><div class="soft-icon">📋</div><div class="soft-name">Manajemen Data</div><div class="soft-desc">Detail-oriented dalam pengolahan, pelaporan, dan pengarsipan dokumen dan data.</div></div>
+    <div class="soft-card"><div class="soft-icon"><img src="assets/public-speaking.jpg" alt="Public Speaking"></div><div class="soft-name">Public Speaking</div><div class="soft-desc">Terbiasa presentasi dan menjadi narasumber di berbagai acara kampus dan pelatihan.</div></div>
+    <div class="soft-card"><div class="soft-icon"><img src="assets/kreatif.jpg" alt="Berpikir Kreatif"></div><div class="soft-name">Berpikir Kreatif</div><div class="soft-desc">Mampu menghadirkan solusi inovatif untuk tantangan teknis maupun non-teknis.</div></div>
+    <div class="soft-card"><div class="soft-icon"><img src="assets/kepemimpinan.jpeg" alt="Kepemimpinan"></div><div class="soft-name">Kepemimpinan</div><div class="soft-desc">Berpengalaman memimpin tim dan berkoordinasi dengan stakeholder proyek.</div></div>
+    <div class="soft-card"><div class="soft-icon"><img src="assets/kolaborasi.jpg" alt="Kolaborasi"></div><div class="soft-name">Troubleshooter</div><div class="soft-desc">Terbiasa bekerja dalam tim multidisiplin dengan komunikasi yang efektif.</div></div>
+    <div class="soft-card"><div class="soft-icon"><img src="assets/narasumber.jpeg" alt="Manajemen Data"></div><div class="soft-name">Narasumber</div><div class="soft-desc">Detail-oriented dalam pengolahan, pelaporan, dan pengarsipan dokumen dan data.</div></div>
     </div>
-  </div>
 </section>
 
 <!-- ====== EXPERIENCE ====== -->
