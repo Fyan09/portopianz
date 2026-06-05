@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Achmad Sofyan Hakiki — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --olive: #4a5e2a; --olive-dark: #2e3a18; --olive-light: #7a9640;
+  --cream: #f5f2eb; --stone: #d4cfc4; --charcoal: #1a1a1a; --text-muted: #666;
+  --white: #ffffff;
+}
+html { scroll-behavior: smooth; }
+body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--charcoal); overflow-x: hidden; }
+
+body::before {
+  content: ''; position: fixed; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: 0; opacity: 0.5;
+}
+
+/* ====== NAV ====== */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.1rem 3rem;
+  background: rgba(245,242,235,0.88); backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(74,94,42,0.15);
+  transition: padding 0.3s;
+}
+nav.scrolled { padding: 0.75rem 3rem; }
+.nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; color: var(--olive); letter-spacing: 0.1em; text-decoration: none; }
+.nav-links { display: flex; gap: 0; list-style: none; }
+.nav-links a {
+  text-decoration: none; font-size: 0.8rem; font-weight: 500;
+  color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase;
+  transition: color 0.2s; padding: 0.4rem 0.9rem; border-radius: 50px;
+  position: relative;
+}
+.nav-links a:hover { color: var(--olive); }
+.nav-links a.active { color: var(--olive); background: rgba(74,94,42,0.08); }
+
+/* Mobile hamburger */
+.nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+.nav-toggle span { display: block; width: 24px; height: 2px; background: var(--olive); border-radius: 2px; transition: all 0.3s; }
+.nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.open span:nth-child(2) { opacity: 0; }
+.nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Scroll progress */
+.scroll-progress {
+  position: fixed; top: 0; left: 0; height: 3px; z-index: 300;
+  background: var(--olive); width: 0%; transition: width 0.1s linear;
+}
+
+/* ====== SECTIONS ====== */
+section { position: relative; z-index: 1; }
+
+/* ============ HERO ============ */
+#home {
+  min-height: 100vh;
+  display: grid; grid-template-columns: 1fr 1fr;
+  align-items: center;
+  padding: 8rem 3rem 3rem;
+  gap: 4rem;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 0.78rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase;
+  color: var(--olive); margin-bottom: 1.5rem;
+  opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s;
+}
+.hero-eyebrow::before { content: ''; display: block; width: 30px; height: 1px; background: var(--olive); }
+.hero-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(5rem, 9vw, 9rem); line-height: 0.9;
+  color: var(--olive-dark); letter-spacing: 0.02em;
+  opacity: 0; animation: fadeUp 0.8s ease forwards 0.4s;
+}
+.hero-name span { display: block; color: var(--olive); -webkit-text-stroke: 2px var(--olive); -webkit-text-fill-color: transparent; }
+.hero-desc {
+  margin-top: 2rem; font-size: 1rem; line-height: 1.75; color: var(--text-muted); max-width: 420px;
+  opacity: 0; animation: fadeUp 0.8s ease forwards 0.6s;
+}
+.hero-cta { margin-top: 2.5rem; display: flex; gap: 1rem; flex-wrap: wrap; opacity: 0; animation: fadeUp 0.8s ease forwards 0.8s; }
+
+.hero-visual {
+  position: relative; display: flex; justify-content: center; align-items: flex-end; height: 580px;
+  opacity: 0; animation: fadeIn 1s ease forwards 0.5s;
+}
+.photo-frame {
+  position: relative; width: 340px; height: 480px;
+  border-radius: 200px 200px 120px 120px;
+  background: linear-gradient(175deg, var(--olive-light), var(--olive-dark));
+  overflow: hidden; box-shadow: 0 30px 80px rgba(74,94,42,0.3);
+}
+.photo-placeholder {
+  width: 100%; height: 100%; display: flex; align-items: flex-end; justify-content: center;
+  background: linear-gradient(180deg, #7a9640 0%, #2e3a18 100%);
+}
+.photo-placeholder svg { width: 280px; opacity: 0.3; }
+.photo-frame img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+
+.stat-card {
+  position: absolute; background: white; border-radius: 16px; padding: 1rem 1.25rem;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.1); animation: float 4s ease-in-out infinite;
+}
+.stat-card:nth-child(1) { top: 60px; right: -10px; animation-delay: 0s; }
+.stat-card:nth-child(2) { bottom: 120px; left: -30px; animation-delay: 1.5s; }
+.stat-card:nth-child(3) { top: 220px; right: -40px; animation-delay: 0.8s; }
+.stat-num { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--olive); line-height: 1; }
+.stat-label { font-size: 0.7rem; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px; }
+
+.scroll-hint {
+  position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  opacity: 0; animation: fadeIn 1s ease forwards 1.2s;
+}
+.scroll-hint span { font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); }
+.scroll-line { width: 1px; height: 50px; background: linear-gradient(to bottom, var(--olive), transparent); animation: scrollDown 2s ease-in-out infinite; }
+
+.bg-text {
+  position: fixed; bottom: -2rem; left: -1rem;
+  font-family: 'Bebas Neue', sans-serif; font-size: clamp(8rem, 18vw, 18rem);
+  color: rgba(74,94,42,0.05); letter-spacing: 0.05em; pointer-events: none;
+  z-index: 0; line-height: 1; user-select: none;
+}
+
+/* ============ SECTION HEADERS ============ */
+.section-header {
+  position: relative; z-index: 1;
+  padding: 8rem 3rem 4rem;
+  background: var(--olive-dark); overflow: hidden;
+}
+.section-header-bg {
+  position: absolute; right: -2rem; top: 50%; transform: translateY(-50%);
+  font-family: 'Bebas Neue', sans-serif; font-size: clamp(6rem, 12vw, 11rem);
+  color: rgba(255,255,255,0.05); pointer-events: none; white-space: nowrap;
+}
+.section-header h2 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 7vw, 6rem); color: white; letter-spacing: 0.05em; line-height: 1; }
+.section-header p { margin-top: 1rem; font-size: 1rem; color: rgba(255,255,255,0.55); max-width: 500px; line-height: 1.7; }
+.section-eyebrow { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--olive-light); margin-bottom: 0.75rem; }
+
+.section-label {
+  font-size: 0.7rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--olive);
+  display: flex; align-items: center; gap: 10px; margin-bottom: 2rem;
+}
+.section-label::after { content: ''; flex: 1; height: 1px; background: var(--stone); }
+
+.content { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 4rem 3rem; }
+.content-wide { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 4rem 3rem; }
+
+/* ============ ABOUT ============ */
+.about-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 0; }
+.sidebar { padding-right: 3rem; border-right: 1px solid var(--stone); }
+.profile-photo {
+  width: 100%; aspect-ratio: 3/4; border-radius: 16px;
+  background: linear-gradient(175deg, var(--olive-light), var(--olive-dark));
+  overflow: hidden; margin-bottom: 1.5rem;
+  display: flex; align-items: flex-end; justify-content: center;
+}
+.profile-photo svg { width: 80%; opacity: 0.3; }
+.profile-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+.info-item { margin-bottom: 1.2rem; }
+.info-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--olive); margin-bottom: 4px; }
+.info-value { font-size: 0.95rem; color: var(--charcoal); }
+.tag-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 1.5rem; }
+.tag { padding: 4px 12px; border-radius: 50px; font-size: 0.75rem; font-weight: 500; background: rgba(74,94,42,0.1); color: var(--olive); border: 1px solid rgba(74,94,42,0.2); }
+.main-content { padding-left: 3rem; }
+.bio-text { font-size: 1.05rem; line-height: 1.85; color: #444; margin-bottom: 3rem; }
+.bio-text strong { color: var(--olive-dark); font-weight: 500; }
+.edu-cards { display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 3rem; }
+.edu-card {
+  background: white; border-radius: 16px; padding: 1.75rem;
+  border-left: 4px solid var(--olive); box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+  transition: transform 0.25s;
+}
+.edu-card:hover { transform: translateX(6px); }
+.edu-year { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: var(--olive); line-height: 1; }
+.edu-school { font-size: 1.1rem; font-weight: 500; color: var(--charcoal); margin: 4px 0; }
+.edu-major { font-size: 0.85rem; color: var(--olive); font-weight: 500; margin-bottom: 1rem; }
+.edu-desc { font-size: 0.9rem; line-height: 1.7; color: var(--text-muted); }
+.achieve-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; }
+.achieve-card { background: var(--olive-dark); color: white; border-radius: 12px; padding: 1.25rem; text-align: center; }
+.achieve-icon { font-size: 1.5rem; margin-bottom: 8px; }
+.achieve-val { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; line-height: 1; }
+.achieve-lbl { font-size: 0.72rem; opacity: 0.6; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 4px; }
+
+/* ============ SKILLS ============ */
+.skills-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 1rem; margin-bottom: 4rem;
+}
+.skill-chip {
+  background: white; border-radius: 16px; padding: 1.5rem 1rem; text-align: center;
+  border: 1px solid rgba(74,94,42,0.08); box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  transition: all 0.3s; cursor: default; position: relative; overflow: hidden;
+}
+.skill-chip::before {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px;
+  background: var(--olive); transform: scaleX(0); transition: transform 0.3s;
+}
+.skill-chip:hover { transform: translateY(-6px); box-shadow: 0 12px 30px rgba(74,94,42,0.15); }
+.skill-chip:hover::before { transform: scaleX(1); }
+.skill-icon { font-size: 2.2rem; margin-bottom: 8px; display: block; }
+.skill-name { font-size: 0.8rem; font-weight: 500; color: var(--charcoal); }
+.skill-type { font-size: 0.68rem; color: var(--text-muted); margin-top: 3px; }
+.skill-bars { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 4rem; }
+.skill-bar-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; }
+.skill-bar-name { font-size: 0.9rem; font-weight: 500; }
+.skill-bar-pct { font-size: 0.8rem; color: var(--olive); font-weight: 500; }
+.skill-bar-track { height: 6px; background: rgba(74,94,42,0.1); border-radius: 50px; overflow: hidden; }
+.skill-bar-fill { height: 100%; background: var(--olive); border-radius: 50px; width: 0; transition: width 1.2s cubic-bezier(0.4,0,0.2,1); }
+.soft-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+.soft-card { background: var(--olive-dark); color: white; border-radius: 16px; padding: 1.5rem; display: flex; flex-direction: column; gap: 8px; transition: transform 0.25s; }
+.soft-card:hover { transform: translateY(-4px); }
+.soft-icon { font-size: 1.8rem; }
+.soft-name { font-weight: 500; font-size: 1rem; }
+.soft-desc { font-size: 0.8rem; opacity: 0.6; line-height: 1.5; }
+
+/* ============ EXPERIENCE ============ */
+.timeline { position: relative; }
+.timeline::before { content: ''; position: absolute; left: 24px; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--olive), transparent); }
+.exp-item { position: relative; padding-left: 70px; margin-bottom: 4rem; }
+.exp-dot { position: absolute; left: 14px; top: 6px; width: 22px; height: 22px; border-radius: 50%; background: var(--olive); border: 4px solid var(--cream); box-shadow: 0 0 0 2px var(--olive); z-index: 1; }
+.exp-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 24px rgba(0,0,0,0.06); transition: transform 0.3s; }
+.exp-card:hover { transform: translateY(-4px); }
+.exp-header { background: var(--olive-dark); color: white; padding: 1.75rem 2rem; display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; flex-wrap: wrap; }
+.exp-company { font-size: 0.8rem; opacity: 0.6; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
+.exp-title { font-family: 'Bebas Neue', sans-serif; font-size: 1.8rem; letter-spacing: 0.05em; line-height: 1; }
+.exp-badge { padding: 6px 14px; border-radius: 50px; font-size: 0.72rem; font-weight: 500; white-space: nowrap; align-self: flex-start; }
+.badge-mobile { background: rgba(122,150,64,0.2); color: var(--olive-light); border: 1px solid rgba(122,150,64,0.3); }
+.badge-web { background: rgba(255,255,255,0.1); color: white; border: 1px solid rgba(255,255,255,0.2); }
+.badge-admin { background: rgba(200,150,80,0.2); color: #c89650; border: 1px solid rgba(200,150,80,0.3); }
+.exp-body { padding: 2rem; }
+.exp-desc { font-size: 0.92rem; color: var(--text-muted); line-height: 1.75; margin-bottom: 1.5rem; }
+.exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.exp-bullets li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.9rem; color: var(--charcoal); line-height: 1.6; }
+.exp-bullets li::before { content: '▸'; color: var(--olive); font-size: 0.75rem; flex-shrink: 0; margin-top: 3px; }
+.exp-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid var(--stone); }
+.exp-tag { padding: 4px 12px; border-radius: 50px; font-size: 0.72rem; font-weight: 500; background: rgba(74,94,42,0.08); color: var(--olive); }
+
+/* ============ PROJECTS ============ */
+.filter-bar {
+  position: sticky; top: 65px; z-index: 50;
+  background: rgba(245,242,235,0.95); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--stone);
+  padding: 1rem 3rem;
+  display: flex; gap: 0.75rem; flex-wrap: wrap;
+}
+.filter-btn {
+  padding: 6px 18px; border-radius: 50px; font-size: 0.8rem; font-weight: 500;
+  border: 1.5px solid var(--stone); background: transparent; color: var(--text-muted);
+  cursor: pointer; transition: all 0.2s; font-family: 'DM Sans', sans-serif;
+}
+.filter-btn:hover { border-color: var(--olive); color: var(--olive); }
+.filter-btn.active { background: var(--olive); color: white; border-color: var(--olive); }
+.projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 4rem; }
+.project-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.06); transition: all 0.35s; cursor: pointer; display: flex; flex-direction: column; }
+.project-card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(74,94,42,0.15); }
+.project-card.hidden { display: none; }
+.project-thumb { height: 180px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
+.thumb-mobile { background: linear-gradient(135deg, #1e3a5f, #2563a8); }
+.thumb-web { background: linear-gradient(135deg, #2e3a18, #4a5e2a); }
+.thumb-iot { background: linear-gradient(135deg, #1a1a2e, #16213e); }
+.thumb-icon { font-size: 3.5rem; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3)); transition: transform 0.3s; }
+.project-card:hover .thumb-icon { transform: scale(1.15) rotate(5deg); }
+.thumb-badge { position: absolute; top: 12px; right: 12px; padding: 4px 10px; border-radius: 50px; font-size: 0.65rem; font-weight: 500; background: rgba(255,255,255,0.15); color: white; backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.2); letter-spacing: 0.08em; text-transform: uppercase; }
+.project-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
+.project-name { font-size: 1rem; font-weight: 500; color: var(--charcoal); margin-bottom: 6px; }
+.project-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; flex: 1; }
+.project-stack { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--stone); }
+.stack-tag { padding: 3px 10px; border-radius: 50px; font-size: 0.68rem; font-weight: 500; background: rgba(74,94,42,0.07); color: var(--olive); }
+
+/* ============ CERTIFICATIONS ============ */
+.achieve-featured { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem; margin-bottom: 4rem; }
+.ach-card { border-radius: 20px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); transition: all 0.3s; cursor: default; position: relative; }
+.ach-card:hover { transform: translateY(-6px); box-shadow: 0 16px 40px rgba(0,0,0,0.12); }
+.ach-card-inner { padding: 2rem 1.75rem; }
+.ach-rank { font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem; line-height: 1; margin-bottom: 6px; }
+.ach-event { font-size: 0.95rem; font-weight: 500; margin-bottom: 4px; }
+.ach-org { font-size: 0.8rem; opacity: 0.6; }
+.card-gold { background: linear-gradient(135deg, #3d2a00, #6b4400); color: white; }
+.card-gold .ach-rank { color: #ffd700; }
+.card-silver { background: linear-gradient(135deg, #1a2030, #2a3545); color: white; }
+.card-silver .ach-rank { color: #a8c0d0; }
+.card-green { background: var(--olive-dark); color: white; }
+.card-green .ach-rank { color: var(--olive-light); }
+.card-white { background: white; color: var(--charcoal); border: 1px solid var(--stone); }
+.card-white .ach-rank { color: var(--olive); }
+.medal-icon { position: absolute; top: 1.25rem; right: 1.25rem; font-size: 2rem; opacity: 0.7; }
+.cert-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 4rem; }
+.cert-card { background: white; border-radius: 16px; padding: 1.5rem; border: 1px solid var(--stone); transition: all 0.25s; display: flex; flex-direction: column; gap: 10px; }
+.cert-card:hover { border-color: var(--olive); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(74,94,42,0.1); }
+.cert-icon { font-size: 1.8rem; }
+.cert-name { font-size: 0.9rem; font-weight: 500; color: var(--charcoal); line-height: 1.4; }
+.cert-issuer { font-size: 0.75rem; color: var(--olive); font-weight: 500; }
+.cert-date { font-size: 0.72rem; color: var(--text-muted); margin-top: auto; }
+.cert-badge { display: inline-block; padding: 3px 10px; border-radius: 50px; font-size: 0.65rem; font-weight: 500; background: rgba(74,94,42,0.08); color: var(--olive); width: fit-content; }
+
+/* ============ CONTACT ============ */
+#contact .contact-inner {
+  display: grid; grid-template-columns: 1fr 1fr; min-height: 80vh; overflow: hidden;
+}
+.contact-left {
+  background: var(--olive-dark); padding: 5rem 4rem;
+  display: flex; flex-direction: column; justify-content: center; position: relative; overflow: hidden;
+}
+.contact-left-bg {
+  position: absolute; bottom: -3rem; left: -3rem;
+  font-family: 'Bebas Neue', sans-serif; font-size: clamp(6rem, 12vw, 11rem);
+  color: rgba(255,255,255,0.04); line-height: 1; pointer-events: none; letter-spacing: 0.02em;
+}
+.contact-eyebrow { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--olive-light); margin-bottom: 1.5rem; }
+.contact-heading { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4rem, 8vw, 7rem); color: white; letter-spacing: 0.03em; line-height: 0.95; margin-bottom: 2rem; }
+.contact-heading span { color: var(--olive-light); }
+.contact-tagline { font-size: 1rem; color: rgba(255,255,255,0.5); line-height: 1.75; max-width: 380px; margin-bottom: 3rem; }
+.contact-links { display: flex; flex-direction: column; gap: 1.25rem; }
+.contact-link { display: flex; align-items: center; gap: 1.25rem; text-decoration: none; padding: 1.25rem 1.5rem; border-radius: 16px; border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.04); transition: all 0.3s; }
+.contact-link:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.25); transform: translateX(6px); }
+.cl-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; }
+.cl-icon.phone { background: rgba(122,150,64,0.25); }
+.cl-icon.insta { background: rgba(200,100,150,0.2); }
+.cl-icon.email { background: rgba(80,140,200,0.2); }
+.cl-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.4); margin-bottom: 3px; }
+.cl-value { font-size: 0.95rem; font-weight: 500; color: white; }
+.cl-arrow { margin-left: auto; color: rgba(255,255,255,0.3); font-size: 1.2rem; transition: transform 0.2s; }
+.contact-link:hover .cl-arrow { transform: translateX(4px); color: white; }
+.contact-right { padding: 5rem 4rem; display: flex; flex-direction: column; justify-content: center; background: var(--cream); }
+.form-heading { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; color: var(--charcoal); letter-spacing: 0.05em; margin-bottom: 0.5rem; }
+.form-sub { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 2.5rem; line-height: 1.6; }
+.form-group { margin-bottom: 1.25rem; }
+.form-label { display: block; font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 8px; }
+.form-input, .form-textarea { width: 100%; padding: 0.9rem 1.1rem; border-radius: 12px; border: 1.5px solid var(--stone); background: white; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; color: var(--charcoal); transition: border-color 0.2s; outline: none; }
+.form-input:focus, .form-textarea:focus { border-color: var(--olive); }
+.form-textarea { resize: vertical; min-height: 140px; line-height: 1.6; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.submit-btn { width: 100%; padding: 1rem 2rem; border-radius: 50px; background: var(--olive); color: white; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 500; border: none; cursor: pointer; transition: all 0.25s; margin-top: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 8px; }
+.submit-btn:hover { background: var(--olive-dark); transform: translateY(-2px); }
+.success-msg { display: none; background: rgba(74,94,42,0.08); border: 1.5px solid var(--olive); border-radius: 12px; padding: 1rem 1.25rem; font-size: 0.9rem; color: var(--olive-dark); margin-top: 1rem; text-align: center; }
+
+/* ====== FOOTER ====== */
+footer {
+  position: relative; z-index: 1; background: var(--charcoal); color: rgba(255,255,255,0.4);
+  padding: 1.5rem 3rem; display: flex; justify-content: space-between; align-items: center;
+  font-size: 0.8rem; flex-wrap: wrap; gap: 1rem;
+}
+footer a { color: rgba(255,255,255,0.6); text-decoration: none; }
+footer a:hover { color: white; }
+
+/* ====== DIVIDER ====== */
+.section-divider {
+  position: relative; z-index: 1;
+  background: var(--olive-dark); color: white; padding: 1.25rem 3rem;
+  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+}
+.section-divider p { font-size: 0.82rem; opacity: 0.5; letter-spacing: 0.1em; text-transform: uppercase; }
+.divider-scroll { font-size: 0.82rem; opacity: 0.5; display: flex; align-items: center; gap: 8px; }
+
+/* ====== BUTTONS ====== */
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 0.85rem 2rem; border-radius: 50px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 500; text-decoration: none; transition: all 0.25s; cursor: pointer; border: none; }
+.btn-primary { background: var(--olive); color: white; }
+.btn-primary:hover { background: var(--olive-dark); transform: translateY(-2px); }
+.btn-secondary { background: transparent; color: var(--olive); border: 1.5px solid var(--olive); }
+.btn-secondary:hover { background: var(--olive); color: white; transform: translateY(-2px); }
+.section-cta { position: relative; z-index: 1; display: flex; gap: 1rem; justify-content: flex-end; flex-wrap: wrap; padding: 0 3rem 3rem; max-width: 1200px; margin: 0 auto; }
+
+/* ====== REVEAL ====== */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ====== ANIMATIONS ====== */
+@keyframes fadeUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+@keyframes scrollDown { 0% { opacity: 0; transform: scaleY(0); transform-origin: top; } 50% { opacity: 1; transform: scaleY(1); } 100% { opacity: 0; transform: translateY(20px); } }
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 900px) {
+  nav { padding: 1rem 1.5rem; }
+  .nav-links { display: none; position: absolute; top: 100%; left: 0; right: 0; background: rgba(245,242,235,0.98); backdrop-filter: blur(14px); flex-direction: column; padding: 1rem; border-bottom: 1px solid var(--stone); gap: 0.25rem; }
+  .nav-links.open { display: flex; }
+  .nav-toggle { display: flex; }
+  #home { grid-template-columns: 1fr; padding: 7rem 1.5rem 3rem; gap: 2rem; }
+  .hero-visual { height: 380px; order: -1; }
+  .photo-frame { width: 240px; height: 340px; }
+  .stat-card:nth-child(2) { left: 0; }
+  .stat-card:nth-child(3) { right: 0; }
+  .section-header { padding: 5rem 1.5rem 3rem; }
+  .content, .content-wide { padding: 3rem 1.5rem; }
+  .about-grid { grid-template-columns: 1fr; }
+  .sidebar { padding-right: 0; border-right: none; border-bottom: 1px solid var(--stone); padding-bottom: 2rem; margin-bottom: 2rem; }
+  .main-content { padding-left: 0; }
+  .achieve-grid { grid-template-columns: 1fr 1fr; }
+  .skills-grid { grid-template-columns: repeat(3, 1fr); }
+  #contact .contact-inner { grid-template-columns: 1fr; }
+  .contact-left { padding: 4rem 1.5rem; }
+  .contact-right { padding: 3rem 1.5rem; }
+  .form-row { grid-template-columns: 1fr; }
+  .filter-bar { padding: 1rem 1.5rem; }
+  .projects-grid { grid-template-columns: 1fr; }
+  footer { padding: 1.5rem; }
+  .exp-item { padding-left: 50px; }
+  .section-cta { padding: 0 1.5rem 2rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+<div class="bg-text" id="bgText">ASH</div>
+
+<!-- ====== NAV ====== -->
+<nav id="mainNav">
+  <a href="#home" class="nav-logo">ASH</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home" class="active">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#certifications">Certificates</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-toggle" id="navToggle" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ====== HOME ====== -->
+<section id="home">
+  <div class="hero-text">
+    <div class="hero-eyebrow">Computer Engineering Graduate · 2026</div>
+    <h1 class="hero-name">Achmad<span>Sofyan</span>Hakiki</h1>
+    <p class="hero-desc">Lulusan Teknik Komputer Politeknik Negeri Jember dengan keahlian di IoT, Networking, dan Web Development. Berpengalaman membangun sistem monitoring real-time dan aplikasi terintegrasi.</p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary">Lihat Projects →</a>
+      <a href="#contact" class="btn btn-secondary">Hubungi Saya</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="stat-card"><div class="stat-num">13+</div><div class="stat-label">Projects selesai</div></div>
+    <div class="stat-card"><div class="stat-num">8</div><div class="stat-label">Website klinik</div></div>
+    <div class="stat-card"><div class="stat-num">5+</div><div class="stat-label">Penghargaan</div></div>
+    <div class="photo-frame">
+      <div class="photo-placeholder">
+        <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="100" cy="80" rx="50" ry="55" fill="white"/>
+          <path d="M10 240 Q10 160 100 155 Q190 160 190 240" fill="white"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint"><span>Scroll</span><div class="scroll-line"></div></div>
+</section>
+
+<!-- ====== ABOUT ====== -->
+<div class="section-divider"><p>→ About Me</p><span class="divider-scroll">scroll terus kebawah ↓</span></div>
+<section id="about">
+  <div class="section-header">
+    <div class="section-header-bg">ABOUT ME</div>
+    <p class="section-eyebrow">Home / About</p>
+    <h2>About Me</h2>
+    <p>Kenalan lebih dalam dengan latar belakang, pendidikan, dan perjalanan saya sebagai seorang engineer muda dari Jember.</p>
+  </div>
+  <div class="content-wide">
+    <div class="about-grid">
+      <aside class="sidebar">
+        <div class="profile-photo">
+          <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="100" cy="80" rx="50" ry="55" fill="white"/>
+            <path d="M10 240 Q10 160 100 155 Q190 160 190 240" fill="white"/>
+          </svg>
+        </div>
+        <div class="info-item"><div class="info-label">Nama lengkap</div><div class="info-value">Achmad Sofyan Hakiki</div></div>
+        <div class="info-item"><div class="info-label">Domisili</div><div class="info-value">Jember, Jawa Timur</div></div>
+        <div class="info-item"><div class="info-label">Email</div><div class="info-value">fyanhakiki@gmail.com</div></div>
+        <div class="info-item"><div class="info-label">Telepon</div><div class="info-value">081649321371</div></div>
+        <div class="info-item"><div class="info-label">Instagram</div><div class="info-value">@sfyaan._</div></div>
+        <div class="info-item"><div class="info-label">Status</div><div class="info-value">Open for work ✓</div></div>
+        <div class="tag-list">
+          <span class="tag">IoT</span><span class="tag">Web Dev</span><span class="tag">Mobile Dev</span>
+          <span class="tag">Networking</span><span class="tag">UI/UX</span><span class="tag">Admin</span>
+        </div>
+      </aside>
+      <main class="main-content">
+        <div class="section-label">Bio</div>
+        <p class="bio-text">
+          Saya adalah <strong>lulusan Teknik Komputer</strong> Politeknik Negeri Jember tahun 2026 dengan passion kuat di bidang IoT, Networking, dan Web Development. Berpengalaman dalam membangun sistem monitoring terintegrasi secara real-time, mulai dari sisi hardware hingga implementasi aplikasi.<br><br>
+          Selain itu, saya juga terampil dalam pekerjaan administratif seperti manajemen data, pelaporan, dan dokumentasi. Seorang individu yang detail-oriented dan adaptif, siap berkontribusi di peran IT maupun administratif.
+        </p>
+        <div class="section-label reveal">Pendidikan</div>
+        <div class="edu-cards">
+          <div class="edu-card reveal">
+            <div class="edu-year">2026</div>
+            <div class="edu-school">Politeknik Negeri Jember</div>
+            <div class="edu-major">D3 Teknik Komputer</div>
+            <div class="edu-desc">Mengembangkan berbagai sistem berbasis IoT termasuk monitoring suhu real-time dan hidroponik pintar yang terintegrasi dengan aplikasi web/mobile. Membangun sistem tiket online berbasis web. Berpengalaman dalam integrasi perangkat IoT dengan aplikasi, pengembangan sistem end-to-end dari desain hardware hingga implementasi.</div>
+          </div>
+          <div class="edu-card reveal">
+            <div class="edu-year">2023</div>
+            <div class="edu-school">SMA Negeri Jenggawah</div>
+            <div class="edu-major">IPA (Ilmu Pengetahuan Alam)</div>
+            <div class="edu-desc">Menjabat sebagai Wakil Ketua Kelas. Meraih Juara 2 Lomba Karya Tulis Ilmiah tingkat SMA dan Juara 1 Olimpiade TIK tingkat Kabupaten Jember. Meraih medali EMAS dan PERAK di Kompetisi Islami Nasional Gojo, serta medali PERAK di Kompetisi Nasional Puskanas.</div>
+          </div>
+        </div>
+        <div class="section-label reveal">Pencapaian</div>
+        <div class="achieve-grid reveal">
+          <div class="achieve-card"><div class="achieve-icon">🥇</div><div class="achieve-val">5+</div><div class="achieve-lbl">Penghargaan kompetisi</div></div>
+          <div class="achieve-card"><div class="achieve-icon">💻</div><div class="achieve-val">13+</div><div class="achieve-lbl">Projects selesai</div></div>
+          <div class="achieve-card"><div class="achieve-icon">📜</div><div class="achieve-val">8+</div><div class="achieve-lbl">Sertifikasi & pelatihan</div></div>
+        </div>
+      </main>
+    </div>
+  </div>
+</section>
+
+<!-- ====== SKILLS ====== -->
+<div class="section-divider"><p>→ Skills</p><span class="divider-scroll">scroll terus kebawah ↓</span></div>
+<section id="skills">
+  <div class="section-header">
+    <div class="section-header-bg">SKILLS</div>
+    <p class="section-eyebrow">Home / Skills</p>
+    <h2>Personal Skill</h2>
+    <p>Kombinasi hard skill teknis dan soft skill interpersonal yang saya kuasai selama perjalanan akademik dan profesional.</p>
+  </div>
+  <div class="content">
+    <div class="section-label reveal">Hard Skill — Teknologi & Tools</div>
+    <div class="skills-grid reveal">
+      <div class="skill-chip"><span class="skill-icon">⬛</span><div class="skill-name">Next.js</div><div class="skill-type">Framework</div></div>
+      <div class="skill-chip"><span class="skill-icon">🔴</span><div class="skill-name">CodeIgniter</div><div class="skill-type">PHP Framework</div></div>
+      <div class="skill-chip"><span class="skill-icon">⚛️</span><div class="skill-name">React</div><div class="skill-type">UI Library</div></div>
+      <div class="skill-chip"><span class="skill-icon">🌊</span><div class="skill-name">Tailwind</div><div class="skill-type">CSS Framework</div></div>
+      <div class="skill-chip"><span class="skill-icon">🔷</span><div class="skill-name">C++</div><div class="skill-type">Language</div></div>
+      <div class="skill-chip"><span class="skill-icon">🟨</span><div class="skill-name">JavaScript</div><div class="skill-type">Language</div></div>
+      <div class="skill-chip"><span class="skill-icon">🎨</span><div class="skill-name">Canva</div><div class="skill-type">Design</div></div>
+      <div class="skill-chip"><span class="skill-icon">⚡</span><div class="skill-name">Arduino</div><div class="skill-type">IoT</div></div>
+      <div class="skill-chip"><span class="skill-icon">🗄️</span><div class="skill-name">MySQL</div><div class="skill-type">Database</div></div>
+      <div class="skill-chip"><span class="skill-icon">📊</span><div class="skill-name">MS Office</div><div class="skill-type">Productivity</div></div>
+      <div class="skill-chip"><span class="skill-icon">🔗</span><div class="skill-name">Firebase</div><div class="skill-type">Cloud/IoT</div></div>
+      <div class="skill-chip"><span class="skill-icon">📱</span><div class="skill-name">Flutter</div><div class="skill-type">Mobile</div></div>
+    </div>
+    <div class="section-label reveal">Tingkat Kemampuan</div>
+    <div class="skill-bars reveal" id="skillBars">
+      <div class="skill-bar-item"><div class="skill-bar-header"><span class="skill-bar-name">Web Development (PHP/JS)</span><span class="skill-bar-pct">88%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="88"></div></div></div>
+      <div class="skill-bar-item"><div class="skill-bar-header"><span class="skill-bar-name">IoT & Embedded Systems</span><span class="skill-bar-pct">82%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="82"></div></div></div>
+      <div class="skill-bar-item"><div class="skill-bar-header"><span class="skill-bar-name">Mobile Development (Flutter)</span><span class="skill-bar-pct">78%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="78"></div></div></div>
+      <div class="skill-bar-item"><div class="skill-bar-header"><span class="skill-bar-name">UI/UX Design</span><span class="skill-bar-pct">75%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="75"></div></div></div>
+      <div class="skill-bar-item"><div class="skill-bar-header"><span class="skill-bar-name">Networking & Server</span><span class="skill-bar-pct">70%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="70"></div></div></div>
+      <div class="skill-bar-item"><div class="skill-bar-header"><span class="skill-bar-name">Data Management (Excel/Accurate)</span><span class="skill-bar-pct">85%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="85"></div></div></div>
+    </div>
+    <div class="section-label reveal">Soft Skill</div>
+    <div class="soft-grid reveal">
+      <div class="soft-card"><div class="soft-icon">🎤</div><div class="soft-name">Public Speaking</div><div class="soft-desc">Terbiasa presentasi dan menjadi narasumber di berbagai acara kampus dan pelatihan.</div></div>
+      <div class="soft-card"><div class="soft-icon">💡</div><div class="soft-name">Berpikir Kreatif</div><div class="soft-desc">Mampu menghadirkan solusi inovatif untuk tantangan teknis maupun non-teknis.</div></div>
+      <div class="soft-card"><div class="soft-icon">👥</div><div class="soft-name">Kepemimpinan</div><div class="soft-desc">Berpengalaman memimpin tim dan berkoordinasi dengan stakeholder proyek.</div></div>
+      <div class="soft-card"><div class="soft-icon">🤝</div><div class="soft-name">Kolaborasi</div><div class="soft-desc">Terbiasa bekerja dalam tim multidisiplin dengan komunikasi yang efektif.</div></div>
+      <div class="soft-card"><div class="soft-icon">📋</div><div class="soft-name">Manajemen Data</div><div class="soft-desc">Detail-oriented dalam pengolahan, pelaporan, dan pengarsipan dokumen dan data.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== EXPERIENCE ====== -->
+<div class="section-divider"><p>→ Experience</p><span class="divider-scroll">scroll terus kebawah ↓</span></div>
+<section id="experience">
+  <div class="section-header">
+    <div class="section-header-bg">EXPERIENCE</div>
+    <p class="section-eyebrow">Home / Experience</p>
+    <h2>Work Experience</h2>
+    <p>Pengalaman profesional saya dalam pengembangan web, mobile, IoT, dan administrasi operasional.</p>
+  </div>
+  <div class="content">
+    <div class="section-label">Riwayat Pekerjaan</div>
+    <div class="timeline">
+      <div class="exp-item reveal">
+        <div class="exp-dot"></div>
+        <div class="exp-card">
+          <div class="exp-header">
+            <div><div class="exp-company">CV. E-Solusindo</div><div class="exp-title">Mobile Developer</div></div>
+            <span class="exp-badge badge-mobile">Merdeka WMK Program</span>
+          </div>
+          <div class="exp-body">
+            <p class="exp-desc">Terpilih dalam Program Wirausaha Merdeka Kampus (WMK) oleh Kementerian Pendidikan Indonesia. Mengembangkan Smart Aqua, sistem monitoring aquascape berbasis IoT dengan integrasi aplikasi mobile real-time.</p>
+            <ul class="exp-bullets">
+              <li>Mengembangkan Smart Aqua — sistem monitoring IoT aquascape dengan integrasi aplikasi mobile real-time</li>
+              <li>Merancang dan membangun aplikasi mobile dengan optimasi UI/UX, terintegrasi dengan perangkat IoT untuk monitoring parameter air (suhu, pH, turbiditas) via cloud</li>
+              <li>Melakukan pengujian sistem end-to-end mencakup perangkat IoT, server, dan aplikasi mobile</li>
+              <li>Menerapkan prinsip technopreneurship dengan menggabungkan teknologi, bisnis, dan pengembangan produk digital berkelanjutan</li>
+            </ul>
+            <div class="exp-tags"><span class="exp-tag">Flutter</span><span class="exp-tag">IoT</span><span class="exp-tag">Firebase</span><span class="exp-tag">UI/UX</span><span class="exp-tag">Arduino</span><span class="exp-tag">Technopreneurship</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="exp-item reveal">
+        <div class="exp-dot"></div>
+        <div class="exp-card">
+          <div class="exp-header">
+            <div><div class="exp-company">CV. E-Solusindo</div><div class="exp-title">Web Developer</div></div>
+            <span class="exp-badge badge-web">Full-Stack</span>
+          </div>
+          <div class="exp-body">
+            <p class="exp-desc">Mengembangkan dan mengelola berbagai proyek web profesional termasuk website klinik, sekolah, dan sistem IoT yang terintegrasi dengan platform web.</p>
+            <ul class="exp-bullets">
+              <li>Mengembangkan dan mengelola 8 website klinik di Jawa Timur, menyediakan layanan kesehatan digital</li>
+              <li>Membangun website resmi sekolah (SMPN 3 & SMPN 1 Jember) dengan pengembangan full-stack dan desain UI/UX</li>
+              <li>Mengimplementasikan integrasi CMS untuk manajemen konten yang efisien oleh institusi</li>
+              <li>Merancang sistem absensi IoT berbasis RFID dengan integrasi web real-time</li>
+              <li>Melakukan pengujian sistem, debugging, dan optimasi performa</li>
+            </ul>
+            <div class="exp-tags"><span class="exp-tag">CodeIgniter</span><span class="exp-tag">Next.js</span><span class="exp-tag">MySQL</span><span class="exp-tag">RFID</span><span class="exp-tag">CMS</span><span class="exp-tag">UI/UX</span></div>
+          </div>
+        </div>
+      </div>
+      <div class="exp-item reveal">
+        <div class="exp-dot"></div>
+        <div class="exp-card">
+          <div class="exp-header">
+            <div><div class="exp-company">Threes Petshop</div><div class="exp-title">Administrasi & Operasional</div></div>
+            <span class="exp-badge badge-admin">Admin</span>
+          </div>
+          <div class="exp-body">
+            <p class="exp-desc">Mengelola operasional administratif dan keuangan harian petshop, memastikan data transaksi akurat dan laporan keuangan tersusun dengan baik.</p>
+            <ul class="exp-bullets">
+              <li>Mengoperasikan Microsoft Excel dan Accurate untuk pencatatan, pemrosesan, dan pelaporan transaksi harian</li>
+              <li>Mengelola catatan penjualan, pemasukan, dan pengeluaran sebagai dasar laporan keuangan</li>
+              <li>Menangani operasional kasir untuk pembayaran tunai dan non-tunai secara akurat</li>
+              <li>Menyiapkan laporan penjualan harian, mingguan, dan bulanan menggunakan Excel</li>
+            </ul>
+            <div class="exp-tags"><span class="exp-tag">Microsoft Excel</span><span class="exp-tag">Accurate</span><span class="exp-tag">Data Entry</span><span class="exp-tag">Reporting</span><span class="exp-tag">Cashier</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== PROJECTS ====== -->
+<div class="section-divider"><p>→ Projects</p><span class="divider-scroll">scroll terus kebawah ↓</span></div>
+<section id="projects">
+  <div class="section-header">
+    <div class="section-header-bg">PROJECTS</div>
+    <p class="section-eyebrow">Home / Projects</p>
+    <h2>Project Portfolio</h2>
+    <p>Kumpulan proyek nyata yang telah saya kerjakan — dari aplikasi mobile IoT hingga website profesional.</p>
+  </div>
+  <div class="filter-bar">
+    <button class="filter-btn active" data-filter="all">Semua</button>
+    <button class="filter-btn" data-filter="mobile">Mobile App</button>
+    <button class="filter-btn" data-filter="web">Website</button>
+    <button class="filter-btn" data-filter="iot">IoT System</button>
+  </div>
+  <div class="content-wide">
+    <div class="section-label reveal">13+ Projects — Mobile, Web & IoT</div>
+    <div class="projects-grid">
+      <div class="project-card reveal" data-category="mobile iot">
+        <div class="project-thumb thumb-iot"><span class="thumb-icon">🌡️</span><span class="thumb-badge">Mobile + IoT</span></div>
+        <div class="project-body"><div class="project-name">Monitoring Suhu Real-time</div><div class="project-desc">Sistem monitoring suhu berbasis IoT dengan integrasi aplikasi mobile real-time. Sensor suhu terhubung ke cloud dan ditampilkan di aplikasi dengan histori data dan notifikasi.</div><div class="project-stack"><span class="stack-tag">Flutter</span><span class="stack-tag">IoT</span><span class="stack-tag">Firebase</span><span class="stack-tag">Arduino</span></div></div>
+      </div>
+      <div class="project-card reveal" data-category="mobile iot">
+        <div class="project-thumb thumb-iot"><span class="thumb-icon">🐠</span><span class="thumb-badge">Mobile + IoT</span></div>
+        <div class="project-body"><div class="project-name">Smart Aqua — Monitoring Aquascape</div><div class="project-desc">Sistem monitoring aquascape IoT dengan pemantauan suhu, pH, dan turbiditas air via cloud. Dikembangkan untuk program Wirausaha Merdeka Kampus (WMK).</div><div class="project-stack"><span class="stack-tag">Flutter</span><span class="stack-tag">ESP32</span><span class="stack-tag">Firebase</span><span class="stack-tag">Cloud</span></div></div>
+      </div>
+      <div class="project-card reveal" data-category="mobile iot">
+        <div class="project-thumb thumb-mobile"><span class="thumb-icon">🌧️</span><span class="thumb-badge">Mobile</span></div>
+        <div class="project-body"><div class="project-name">EcoMoni — Monitoring & Pendeteksi Hujan</div><div class="project-desc">Aplikasi monitoring lingkungan dengan pendeteksi curah hujan, monitoring suhu, dan histori data berbasis lokasi untuk wilayah Jember, Jawa Timur.</div><div class="project-stack"><span class="stack-tag">Flutter</span><span class="stack-tag">IoT Sensor</span><span class="stack-tag">Location API</span></div></div>
+      </div>
+      <div class="project-card reveal" data-category="mobile iot">
+        <div class="project-thumb thumb-iot"><span class="thumb-icon">📲</span><span class="thumb-badge">Mobile + RFID</span></div>
+        <div class="project-body"><div class="project-name">Aplikasi Absensi SMPN 3 Jember</div><div class="project-desc">Sistem presensi siswa berbasis RFID terintegrasi dengan aplikasi mobile. Fitur presensi masuk/pulang, pengumuman, dan dashboard admin real-time.</div><div class="project-stack"><span class="stack-tag">Flutter</span><span class="stack-tag">RFID</span><span class="stack-tag">CodeIgniter</span><span class="stack-tag">MySQL</span></div></div>
+      </div>
+      <div class="project-card reveal" data-category="mobile">
+        <div class="project-thumb thumb-mobile"><span class="thumb-icon">🏢</span><span class="thumb-badge">Mobile</span></div>
+        <div class="project-body"><div class="project-name">Aplikasi Absensi Kantor (E-Solusindo)</div><div class="project-desc">Sistem absensi pegawai berbasis mobile dengan fitur presensi masuk/pulang, tracking lokasi, dan manajemen pengumuman untuk kantor.</div><div class="project-stack"><span class="stack-tag">Flutter</span><span class="stack-tag">GPS</span><span class="stack-tag">REST API</span></div></div>
+      </div>
+      <div class="project-card reveal" data-category="web iot">
+        <div class="project-thumb thumb-web"><span class="thumb-icon">🏫</span><span class="thumb-badge">Web</span></div>
+        <div class="project-body"><div class="project-name">Website Absensi SMPN 1 & 3 Jember</div><div class="project-desc">Platform absensi web resmi untuk dua sekolah negeri di Jember. Dashboard admin, statistik kehadiran, dan integrasi dengan sistem RFID.</div><div class="project-stack"><span class="stack-tag">CodeIgniter</span><span class="stack-tag">MySQL</span><span class="stack-tag">Bootstrap</span><span class="stack-tag">RFID</span></div></div>
+      </div>
+      <div class="project-card reveal" data-category="web">
+        <div class="project-thumb thumb-web"><span class="thumb-icon">🏗️</span><span class="thumb-badge">Web</span></div>
+        <div class="project-body"><div class="project-name">Website PT. Prambanan Beton</div><div class="project-desc">Website company profile PT. Prambanan Beton dengan katalog produk beton ready mix (K-225, K-300, K-400, K-500) dan sistem penawaran harga.</div><div class="project-stack"><span class="stack-tag">Next.js</span><span class="stack-tag">Tailwind</span><span class="stack-tag">Company Profile</span></div></div>
+      </div>
+      <div class="project-card reveal" data-category="web">
+        <div class="project-thumb thumb-web"><span class="thumb-icon">🎵</span><span class="thumb-badge">Web App</span></div>
+        <div class="project-body"><div class="project-name">Website Tiket Konser JTI</div><div class="project-desc">Platform booking tiket konser online dengan sistem pemilihan kelas tiket (Reguler, VIP, VVIP), benefit per kelas, dan alur pembelian yang mudah.</div><div class="project-stack"><span class="stack-tag">CodeIgniter</span><span class="stack-tag">MySQL</span><span class="stack-tag">Payment Gateway</span></div></div>
+      </div>
+      <div class="project-card reveal" data-category="web">
+        <div class="project-thumb thumb-iot"><span class="thumb-icon">🏥</span><span class="thumb-badge">Web · 8 Klinik</span></div>
+        <div class="project-body"><div class="project-name">8 Website Klinik Jawa Timur</div><div class="project-desc">Mengembangkan dan mengelola 8 website klinik kesehatan di Jawa Timur dengan sistem manajemen konten, profil dokter, dan layanan digital.</div><div class="project-stack"><span class="stack-tag">CodeIgniter</span><span class="stack-tag">CMS</span><span class="stack-tag">MySQL</span><span class="stack-tag">UI/UX</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== CERTIFICATIONS ====== -->
+<div class="section-divider"><p>→ Certificates & Achievements</p><span class="divider-scroll">scroll terus kebawah ↓</span></div>
+<section id="certifications">
+  <div class="section-header">
+    <div class="section-header-bg">ACHIEVEMENT</div>
+    <p class="section-eyebrow">Home / Certificates & Achievement</p>
+    <h2>Sertifikasi & Prestasi</h2>
+    <p>Perjalanan pencapaian akademik, kompetisi, dan pelatihan profesional yang telah saya ikuti.</p>
+  </div>
+  <div class="content-wide">
+    <div class="section-label reveal">Prestasi Kompetisi</div>
+    <div class="achieve-featured reveal">
+      <div class="ach-card card-gold"><div class="medal-icon">🥇</div><div class="ach-card-inner"><div class="ach-rank">Juara 1</div><div class="ach-event">Lomba Poster Kreativitas Mahasiswa</div><div class="ach-org">Universitas Negeri — Unit Kegiatan Mahasiswa</div></div></div>
+      <div class="ach-card card-green"><div class="medal-icon">🏆</div><div class="ach-card-inner"><div class="ach-rank">Juara 3</div><div class="ach-event">IT Fest — Bidang Internet of Things</div><div class="ach-org">Politeknik Negeri Jember (IT FEST 2025)</div></div></div>
+      <div class="ach-card card-silver"><div class="medal-icon">🌟</div><div class="ach-card-inner"><div class="ach-rank">Top 10</div><div class="ach-event">TELEPATI — IoT Championship</div><div class="ach-org">Himpunan Mahasiswa Teknologi Informasi</div></div></div>
+      <div class="ach-card card-white"><div class="medal-icon">💼</div><div class="ach-card-inner"><div class="ach-rank">Top 10</div><div class="ach-event">AKLAMASI — Business Model Canvas</div><div class="ach-org">Universitas Pendidikan Ganesha</div></div></div>
+      <div class="ach-card card-green"><div class="medal-icon">💡</div><div class="ach-card-inner"><div class="ach-rank">Top 10</div><div class="ach-event">Smart Aqua — Pitchdeck Terbaik WMK</div><div class="ach-org">Politeknik Negeri Jember — Program WMK 2024</div></div></div>
+      <div class="ach-card card-gold"><div class="medal-icon">🎖️</div><div class="ach-card-inner"><div class="ach-rank">Juara 1</div><div class="ach-event">Olimpiade TIK Tingkat Kabupaten</div><div class="ach-org">Kabupaten Jember — SMA Level</div></div></div>
+    </div>
+    <div class="section-label reveal">Sertifikasi & Pelatihan</div>
+    <div class="cert-grid reveal">
+      <div class="cert-card"><div class="cert-icon">🔐</div><div class="cert-name">Junior Cyber Security</div><div class="cert-issuer">BNSP (Badan Nasional Sertifikasi Profesi)</div><div class="cert-date">Politeknik Negeri Jember</div><span class="cert-badge">Kompetensi Nasional</span></div>
+      <div class="cert-card"><div class="cert-icon">💼</div><div class="cert-name">Teknik Kewirausahaan</div><div class="cert-issuer">Lembaga DP&MUBC</div><div class="cert-date">Politeknik Negeri Jember</div><span class="cert-badge">Kompetensi</span></div>
+      <div class="cert-card"><div class="cert-icon">🚀</div><div class="cert-name">Kewirausahaan Industri — Level IV</div><div class="cert-issuer">BNSP</div><div class="cert-date">Desember 2024</div><span class="cert-badge">Kompetensi Nasional</span></div>
+      <div class="cert-card"><div class="cert-icon">👥</div><div class="cert-name">LKMM Tingkat Dasar (TD)</div><div class="cert-issuer">Bakor Pemandu POLIJE</div><div class="cert-date">Politeknik Negeri Jember</div><span class="cert-badge">Kepemimpinan</span></div>
+      <div class="cert-card"><div class="cert-icon">⭐</div><div class="cert-name">LKMM Pra Tingkat Dasar</div><div class="cert-issuer">Bakor Pemandu POLIJE</div><div class="cert-date">Politeknik Negeri Jember</div><span class="cert-badge">Kepemimpinan</span></div>
+      <div class="cert-card"><div class="cert-icon">📱</div><div class="cert-name">Micro Skill Digital</div><div class="cert-issuer">Pusat PLD</div><div class="cert-date">Pelatihan Digital</div><span class="cert-badge">Digital Skills</span></div>
+      <div class="cert-card"><div class="cert-icon">🎤</div><div class="cert-name">Training Public Speaking</div><div class="cert-issuer">FES × BEM FKIP UNEJ</div><div class="cert-date">Universitas Jember</div><span class="cert-badge">Soft Skill</span></div>
+      <div class="cert-card"><div class="cert-icon">💡</div><div class="cert-name">Pelatihan Entrepreneurship</div><div class="cert-issuer">FES × BEM FKIP UNEJ</div><div class="cert-date">Universitas Jember</div><span class="cert-badge">Entrepreneurship</span></div>
+      <div class="cert-card"><div class="cert-icon">🌐</div><div class="cert-name">EPT — English Proficiency Test</div><div class="cert-issuer">UPA Bahasa POLIJE</div><div class="cert-date">Politeknik Negeri Jember</div><span class="cert-badge">Bahasa Inggris</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== CONTACT ====== -->
+<div class="section-divider"><p>→ Contact</p><span class="divider-scroll">scroll terus kebawah ↓</span></div>
+<section id="contact">
+  <div class="contact-inner">
+    <div class="contact-left">
+      <div class="contact-left-bg">CONTACT<br>ME</div>
+      <div class="contact-eyebrow">Mari berkolaborasi</div>
+      <h2 class="contact-heading">Let's<br><span>Talk.</span></h2>
+      <p class="contact-tagline">Terbuka untuk peluang kerja, kolaborasi proyek, atau sekadar ngobrol soal teknologi dan desain.</p>
+      <div class="contact-links">
+        <a href="tel:081649321371" class="contact-link"><div class="cl-icon phone">📞</div><div class="cl-body"><div class="cl-label">Telepon / WhatsApp</div><div class="cl-value">081649321371</div></div><span class="cl-arrow">→</span></a>
+        <a href="https://instagram.com/sfyaan._" target="_blank" class="contact-link"><div class="cl-icon insta">📷</div><div class="cl-body"><div class="cl-label">Instagram</div><div class="cl-value">@sfyaan._</div></div><span class="cl-arrow">→</span></a>
+        <a href="mailto:fyanhakiki@gmail.com" class="contact-link"><div class="cl-icon email">✉️</div><div class="cl-body"><div class="cl-label">Email</div><div class="cl-value">fyanhakiki@gmail.com</div></div><span class="cl-arrow">→</span></a>
+      </div>
+    </div>
+    <div class="contact-right">
+      <h3 class="form-heading">Kirim Pesan</h3>
+      <p class="form-sub">Isi formulir di bawah ini dan saya akan membalas sesegera mungkin.</p>
+      <div class="form-row">
+        <div class="form-group"><label class="form-label">Nama</label><input type="text" class="form-input" id="inputName" placeholder="Nama kamu" /></div>
+        <div class="form-group"><label class="form-label">Email / WA</label><input type="text" class="form-input" id="inputEmail" placeholder="email atau nomer WA" /></div>
+      </div>
+      <div class="form-group"><label class="form-label">Subjek</label><input type="text" class="form-input" id="inputSubject" placeholder="Tentang apa?" /></div>
+      <div class="form-group"><label class="form-label">Pesan</label><textarea class="form-textarea" id="inputMessage" placeholder="Ceritakan lebih lanjut..."></textarea></div>
+      <button class="submit-btn" onclick="handleSubmit()">Kirim Pesan ✉️</button>
+      <div class="success-msg" id="successMsg">✅ Pesan berhasil disiapkan! Silakan kirim via WhatsApp atau email yang terbuka.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== FOOTER ====== -->
+<footer>
+  <span>© 2026 Achmad Sofyan Hakiki — Jember, Jawa Timur</span>
+  <div style="display:flex; gap: 1.5rem; flex-wrap:wrap;">
+    <a href="#home">Home</a>
+    <a href="#projects">Projects</a>
+    <a href="#certifications">Certificates</a>
+    <a href="#contact">Contact</a>
+  </div>
+</footer>
+
+<script>
+// ---- NAV active on scroll ----
+const sections = ['home','about','skills','experience','projects','certifications','contact'];
+const navLinks = document.querySelectorAll('.nav-links a');
+
+function updateActiveNav() {
+  let current = 'home';
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && window.scrollY >= el.offsetTop - 120) current = id;
+  });
+  navLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+}
+
+// ---- Scroll progress ----
+function updateProgress() {
+  const prog = document.getElementById('scrollProgress');
+  const scrolled = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+  prog.style.width = Math.min(scrolled * 100, 100) + '%';
+}
+
+// ---- Nav shrink ----
+function updateNav() {
+  document.getElementById('mainNav').classList.toggle('scrolled', window.scrollY > 80);
+}
+
+// ---- BG text parallax ----
+const bgText = document.getElementById('bgText');
+function updateParallax() {
+  bgText.style.transform = `translateX(${window.scrollY * 0.3}px)`;
+}
+
+window.addEventListener('scroll', () => {
+  updateActiveNav();
+  updateProgress();
+  updateNav();
+  updateParallax();
+}, { passive: true });
+
+// ---- Mobile menu ----
+function toggleMenu() {
+  const links = document.getElementById('navLinks');
+  const toggle = document.getElementById('navToggle');
+  links.classList.toggle('open');
+  toggle.classList.toggle('open');
+}
+// Close menu on link click
+document.querySelectorAll('.nav-links a').forEach(a => {
+  a.addEventListener('click', () => {
+    document.getElementById('navLinks').classList.remove('open');
+    document.getElementById('navToggle').classList.remove('open');
+  });
+});
+
+// ---- Scroll reveal ----
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      // Trigger skill bars
+      if (e.target.id === 'skillBars') {
+        document.querySelectorAll('.skill-bar-fill').forEach(bar => {
+          setTimeout(() => { bar.style.width = bar.dataset.width + '%'; }, 200);
+        });
+      }
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+document.getElementById('skillBars') && observer.observe(document.getElementById('skillBars'));
+
+// ---- Projects filter ----
+const filterBtns = document.querySelectorAll('.filter-btn');
+const cards = document.querySelectorAll('.project-card');
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const f = btn.dataset.filter;
+    cards.forEach(c => {
+      const cats = c.dataset.category || '';
+      if (f === 'all' || cats.includes(f)) {
+        c.style.display = '';
+        c.classList.remove('hidden');
+      } else {
+        c.style.display = 'none';
+        c.classList.add('hidden');
+      }
+    });
+  });
+});
+
+// ---- Contact form ----
+function handleSubmit() {
+  const name = document.getElementById('inputName').value.trim();
+  const contact = document.getElementById('inputEmail').value.trim();
+  const subject = document.getElementById('inputSubject').value.trim();
+  const message = document.getElementById('inputMessage').value.trim();
+  if (!name || !message) { alert('Mohon isi minimal nama dan pesan.'); return; }
+  const waText = encodeURIComponent(`Halo Sofyan! Saya ${name}.\n\n*${subject || 'Pesan dari Portfolio'}*\n\n${message}\n\nKontak saya: ${contact}`);
+  window.open(`https://wa.me/6281649321371?text=${waText}`, '_blank');
+  document.getElementById('successMsg').style.display = 'block';
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — Achmad Sofyan Hakiki</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --olive: #4a5e2a; --olive-dark: #2e3a18; --olive-light: #7a9640;
+    --cream: #f5f2eb; --stone: #d4cfc4; --charcoal: #1a1a1a; --text-muted: #666;
+  }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--charcoal); min-height: 100vh; overflow-x: hidden; }
+
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none; z-index: 0; opacity: 0.5;
+  }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 3rem;
+    background: rgba(245,242,235,0.88); backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(74,94,42,0.15);
+  }
+  .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem; color: var(--olive); letter-spacing: 0.1em; text-decoration: none; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { text-decoration: none; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--olive); }
+
+  /* PAGE HEADER */
+  .page-header {
+    position: relative; z-index: 1;
+    padding: 10rem 3rem 4rem;
+    background: var(--olive-dark);
+    overflow: hidden;
+  }
+  .page-header-bg {
+    position: absolute; right: -2rem; top: 50%; transform: translateY(-50%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(8rem, 15vw, 14rem);
+    color: rgba(255,255,255,0.05);
+    letter-spacing: 0.05em;
+    pointer-events: none; white-space: nowrap;
+  }
+  .page-header h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 7vw, 6rem);
+    color: white;
+    letter-spacing: 0.05em;
+    line-height: 1;
+    animation: fadeUp 0.8s ease forwards;
+  }
+  .page-header p {
+    margin-top: 1rem; font-size: 1rem; color: rgba(255,255,255,0.55);
+    max-width: 500px; line-height: 1.7;
+    animation: fadeUp 0.8s ease forwards 0.2s; opacity: 0;
+  }
+  .breadcrumb { font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--olive-light); margin-bottom: 1rem; }
+
+  /* ABOUT GRID */
+  .about-grid {
+    position: relative; z-index: 1;
+    display: grid; grid-template-columns: 1fr 2fr;
+    gap: 0;
+    max-width: 1200px; margin: 0 auto;
+    padding: 4rem 3rem;
+  }
+
+  /* SIDEBAR */
+  .sidebar { padding-right: 3rem; border-right: 1px solid var(--stone); }
+
+  .profile-photo {
+    width: 100%; aspect-ratio: 3/4;
+    border-radius: 16px;
+    background: linear-gradient(175deg, var(--olive-light), var(--olive-dark));
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    display: flex; align-items: flex-end; justify-content: center;
+  }
+  .profile-photo svg { width: 80%; opacity: 0.3; }
+  .profile-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top; }
+
+  .info-item { margin-bottom: 1.2rem; }
+  .info-label { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--olive); margin-bottom: 4px; }
+  .info-value { font-size: 0.95rem; color: var(--charcoal); }
+
+  .tag-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 1.5rem; }
+  .tag {
+    padding: 4px 12px; border-radius: 50px;
+    font-size: 0.75rem; font-weight: 500;
+    background: rgba(74,94,42,0.1); color: var(--olive);
+    border: 1px solid rgba(74,94,42,0.2);
+  }
+
+  /* MAIN CONTENT */
+  .main-content { padding-left: 3rem; }
+
+  .section-label {
+    font-size: 0.7rem; font-weight: 500; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--olive);
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 1.5rem;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--stone); }
+
+  .bio-text {
+    font-size: 1.05rem; line-height: 1.85; color: #444;
+    margin-bottom: 3rem;
+  }
+  .bio-text strong { color: var(--olive-dark); font-weight: 500; }
+
+  /* EDUCATION */
+  .edu-cards { display: flex; flex-direction: column; gap: 1.5rem; margin-bottom: 3rem; }
+
+  .edu-card {
+    background: white;
+    border-radius: 16px;
+    padding: 1.75rem;
+    border-left: 4px solid var(--olive);
+    box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+    transition: transform 0.25s;
+  }
+  .edu-card:hover { transform: translateX(6px); }
+
+  .edu-year {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem; color: var(--olive); line-height: 1;
+  }
+  .edu-school { font-size: 1.1rem; font-weight: 500; color: var(--charcoal); margin: 4px 0; }
+  .edu-major { font-size: 0.85rem; color: var(--olive); font-weight: 500; margin-bottom: 1rem; }
+  .edu-desc { font-size: 0.9rem; line-height: 1.7; color: var(--text-muted); }
+
+  /* ACHIEVEMENTS STRIP */
+  .achieve-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem;
+    margin-top: 2rem;
+  }
+  .achieve-card {
+    background: var(--olive-dark); color: white;
+    border-radius: 12px; padding: 1.25rem;
+    text-align: center;
+  }
+  .achieve-icon { font-size: 1.5rem; margin-bottom: 8px; }
+  .achieve-val { font-family: 'Bebas Neue', sans-serif; font-size: 2rem; line-height: 1; }
+  .achieve-lbl { font-size: 0.72rem; opacity: 0.6; letter-spacing: 0.08em; text-transform: uppercase; margin-top: 4px; }
+
+  /* CTA FOOTER */
+  .page-footer-cta {
+    position: relative; z-index: 1;
+    text-align: center; padding: 3rem;
+    border-top: 1px solid var(--stone);
+    display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 0.85rem 2rem; border-radius: 50px;
+    font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 500;
+    text-decoration: none; transition: all 0.25s; cursor: pointer; border: none;
+  }
+  .btn-primary { background: var(--olive); color: white; }
+  .btn-primary:hover { background: var(--olive-dark); transform: translateY(-2px); }
+  .btn-secondary { background: transparent; color: var(--olive); border: 1.5px solid var(--olive); }
+  .btn-secondary:hover { background: var(--olive); color: white; transform: translateY(-2px); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Scroll reveal */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { gap: 1rem; }
+    .page-header { padding: 8rem 1.5rem 3rem; }
+    .about-grid { grid-template-columns: 1fr; padding: 2rem 1.5rem; }
+    .sidebar { padding-right: 0; border-right: none; border-bottom: 1px solid var(--stone); padding-bottom: 2rem; margin-bottom: 2rem; }
+    .main-content { padding-left: 0; }
+    .achieve-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">ASH</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="skills.html">Skills</a></li>
+    <li><a href="experience.html">Experience</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="certifications.html">Certificates</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="page-header-bg">ABOUT ME</div>
+  <p class="breadcrumb">Home / About</p>
+  <h1>About Me</h1>
+  <p>Kenalan lebih dalam dengan latar belakang, pendidikan, dan perjalanan saya sebagai seorang engineer muda dari Jember.</p>
+</div>
+
+<!-- ABOUT GRID -->
+<div class="about-grid">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="profile-photo">
+      <!-- Ganti dengan foto: <img src="foto.jpg" alt="Achmad Sofyan Hakiki"> -->
+      <svg viewBox="0 0 200 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <ellipse cx="100" cy="80" rx="50" ry="55" fill="white"/>
+        <path d="M10 240 Q10 160 100 155 Q190 160 190 240" fill="white"/>
+      </svg>
+    </div>
+
+    <div class="info-item">
+      <div class="info-label">Nama lengkap</div>
+      <div class="info-value">Achmad Sofyan Hakiki</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">Domisili</div>
+      <div class="info-value">Jember, Jawa Timur</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">Email</div>
+      <div class="info-value">fyanhakiki@gmail.com</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">Telepon</div>
+      <div class="info-value">081649321371</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">Instagram</div>
+      <div class="info-value">@sfyaan._</div>
+    </div>
+    <div class="info-item">
+      <div class="info-label">Status</div>
+      <div class="info-value">Open for work ✓</div>
+    </div>
+
+    <div class="tag-list">
+      <span class="tag">IoT</span>
+      <span class="tag">Web Dev</span>
+      <span class="tag">Mobile Dev</span>
+      <span class="tag">Networking</span>
+      <span class="tag">UI/UX</span>
+      <span class="tag">Admin</span>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+    <div class="section-label">Bio</div>
+    <p class="bio-text">
+      Saya adalah <strong>lulusan Teknik Komputer</strong> Politeknik Negeri Jember tahun 2026 dengan passion kuat di bidang IoT, Networking, dan Web Development. Berpengalaman dalam membangun sistem monitoring terintegrasi secara real-time, mulai dari sisi hardware hingga implementasi aplikasi.<br><br>
+      Selain itu, saya juga terampil dalam pekerjaan administratif seperti manajemen data, pelaporan, dan dokumentasi. Seorang individu yang detail-oriented dan adaptif, siap berkontribusi di peran IT maupun administratif.
+    </p>
+
+    <div class="section-label reveal">Pendidikan</div>
+    <div class="edu-cards">
+      <div class="edu-card reveal">
+        <div class="edu-year">2026</div>
+        <div class="edu-school">Politeknik Negeri Jember</div>
+        <div class="edu-major">D3 Teknik Komputer</div>
+        <div class="edu-desc">
+          Mengembangkan berbagai sistem berbasis IoT termasuk monitoring suhu real-time dan hidroponik pintar yang terintegrasi dengan aplikasi web/mobile. Membangun sistem tiket online berbasis web. Berpengalaman dalam integrasi perangkat IoT dengan aplikasi, pengembangan sistem end-to-end dari desain hardware hingga implementasi.
+        </div>
+      </div>
+      <div class="edu-card reveal">
+        <div class="edu-year">2023</div>
+        <div class="edu-school">SMA Negeri Jenggawah</div>
+        <div class="edu-major">IPA (Ilmu Pengetahuan Alam)</div>
+        <div class="edu-desc">
+          Menjabat sebagai Wakil Ketua Kelas. Meraih Juara 2 Lomba Karya Tulis Ilmiah tingkat SMA dan Juara 1 Olimpiade TIK tingkat Kabupaten Jember. Meraih medali EMAS dan PERAK di Kompetisi Islami Nasional Gojo, serta medali PERAK di Kompetisi Nasional Puskanas.
+        </div>
+      </div>
+    </div>
+
+    <div class="section-label reveal">Pencapaian</div>
+    <div class="achieve-grid reveal">
+      <div class="achieve-card">
+        <div class="achieve-icon">🥇</div>
+        <div class="achieve-val">5+</div>
+        <div class="achieve-lbl">Penghargaan kompetisi</div>
+      </div>
+      <div class="achieve-card">
+        <div class="achieve-icon">💻</div>
+        <div class="achieve-val">13+</div>
+        <div class="achieve-lbl">Projects selesai</div>
+      </div>
+      <div class="achieve-card">
+        <div class="achieve-icon">📜</div>
+        <div class="achieve-val">8+</div>
+        <div class="achieve-lbl">Sertifikasi & pelatihan</div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<div class="page-footer-cta">
+  <a href="skills.html" class="btn btn-primary">Lihat Skills →</a>
+  <a href="contact.html" class="btn btn-secondary">Hubungi Saya</a>
+</div>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
