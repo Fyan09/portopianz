@@ -357,7 +357,56 @@ section { position: relative; z-index: 1; }
 .submit-btn { width: 100%; padding: 1rem 2rem; border-radius: 50px; background: var(--olive); color: white; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; font-weight: 500; border: none; cursor: pointer; transition: all 0.25s; margin-top: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 8px; }
 .submit-btn:hover { background: var(--olive-dark); transform: translateY(-2px); }
 .success-msg { display: none; background: rgba(74,94,42,0.08); border: 1.5px solid var(--olive); border-radius: 12px; padding: 1rem 1.25rem; font-size: 0.9rem; color: var(--olive-dark); margin-top: 1rem; text-align: center; }
-
+.contact-right {
+  padding: 5rem 4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--olive-dark);
+}
+.contact-photo-wrap {
+  position: relative;
+  width: 280px;
+  height: 380px;
+  border-radius: 200px 200px 120px 120px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(74,94,42,0.25);
+}
+.contact-photo-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  display: block;
+  transition: transform 0.6s ease;
+}
+.contact-photo-wrap:hover img {
+  transform: scale(1.06);
+}
+.contact-photo-overlay {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: center;
+}
+.contact-photo-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(245,242,235,0.95);
+  backdrop-filter: blur(8px);
+  color: var(--charcoal);
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  white-space: nowrap;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
 /* ====== FOOTER ====== */
 footer {
   position: relative; z-index: 1; background: var(--charcoal); color: rgba(255,255,255,0.4);
@@ -456,11 +505,11 @@ footer a:hover { color: white; }
 <body>
 
 <div class="scroll-progress" id="scrollProgress"></div>
-<div class="bg-text" id="bgText">ASH</div>
+<div class="bg-text" id="bgText">Achmad Sofyan Hakiki</div>
 
 <!-- ====== NAV ====== -->
 <nav id="mainNav">
-  <a href="#home" class="nav-logo">ASH</a>
+  <a href="#home" class="nav-logo">Achmad Sofyan Hakiki</a>
   <ul class="nav-links" id="navLinks">
     <li><a href="#home" class="active">Home</a></li>
     <li><a href="#about">About</a></li>
@@ -546,9 +595,9 @@ footer a:hover { color: white; }
         </div>
         <div class="section-label reveal">Pencapaian</div>
         <div class="achieve-grid reveal">
-          <div class="achieve-card"><div class="achieve-icon">🥇</div><div class="achieve-val">5+</div><div class="achieve-lbl">Penghargaan kompetisi</div></div>
-          <div class="achieve-card"><div class="achieve-icon">💻</div><div class="achieve-val">13+</div><div class="achieve-lbl">Projects selesai</div></div>
-          <div class="achieve-card"><div class="achieve-icon">📜</div><div class="achieve-val">8+</div><div class="achieve-lbl">Sertifikasi & pelatihan</div></div>
+          <div class="achieve-card"><div class="achieve-icon"></div><div class="achieve-val">5+</div><div class="achieve-lbl">Penghargaan kompetisi</div></div>
+          <div class="achieve-card"><div class="achieve-icon"></div><div class="achieve-val">13+</div><div class="achieve-lbl">Projects selesai</div></div>
+          <div class="achieve-card"><div class="achieve-icon"></div><div class="achieve-val">8+</div><div class="achieve-lbl">Sertifikasi & pelatihan</div></div>
         </div>
       </main>
     </div>
@@ -600,11 +649,12 @@ footer a:hover { color: white; }
 </div>
     <div class="section-label reveal">Soft Skill</div>
     <div class="soft-grid reveal">
-    <div class="soft-card"><div class="soft-icon"><img src="assets/public-speaking.jpg" alt="Public Speaking"></div><div class="soft-name">Public Speaking</div><div class="soft-desc">Terbiasa presentasi dan menjadi narasumber di berbagai acara kampus dan pelatihan.</div></div>
-    <div class="soft-card"><div class="soft-icon"><img src="assets/kreatif.jpg" alt="Berpikir Kreatif"></div><div class="soft-name">Berpikir Kreatif</div><div class="soft-desc">Mampu menghadirkan solusi inovatif untuk tantangan teknis maupun non-teknis.</div></div>
+    <div class="soft-card"><div class="soft-icon"><img src="assets/sepaking.jpg" alt="Public Speaking"></div><div class="soft-name">Public Speaking</div><div class="soft-desc">Terbiasa presentasi dan menjadi narasumber di berbagai acara kampus dan pelatihan.</div></div>
+    <div class="soft-card"><div class="soft-icon"><img src="assets/berpikirkreatif.jpeg" alt="Berpikir Kreatif"></div><div class="soft-name">Berpikir Kreatif</div><div class="soft-desc">Mampu menghadirkan solusi inovatif untuk tantangan teknis maupun non-teknis.</div></div>
     <div class="soft-card"><div class="soft-icon"><img src="assets/kepemimpinan.jpeg" alt="Kepemimpinan"></div><div class="soft-name">Kepemimpinan</div><div class="soft-desc">Berpengalaman memimpin tim dan berkoordinasi dengan stakeholder proyek.</div></div>
-    <div class="soft-card"><div class="soft-icon"><img src="assets/kolaborasi.jpg" alt="Kolaborasi"></div><div class="soft-name">Troubleshooter</div><div class="soft-desc">Terbiasa bekerja dalam tim multidisiplin dengan komunikasi yang efektif.</div></div>
-    <div class="soft-card"><div class="soft-icon"><img src="assets/narasumber.jpeg" alt="Manajemen Data"></div><div class="soft-name">Narasumber</div><div class="soft-desc">Detail-oriented dalam pengolahan, pelaporan, dan pengarsipan dokumen dan data.</div></div>
+    <div class="soft-card"><div class="soft-icon"><img src="assets/benerin.jpeg" alt="Kolaborasi"></div><div class="soft-name">Troubleshooter</div><div class="soft-desc">Terbiasa memaintenance jaringan dan juga perangkat keras yang ada dikampus.</div></div>
+    <div class="soft-card"><div class="soft-icon"><img src="assets/narasumber.jpeg" alt="Manajemen Data"></div><div class="soft-name">Narasumber</div><div class="soft-desc">Memberikan materi kepada mahasiswa dan juga edukatif.</div></div>
+    <div class="soft-card"><div class="soft-icon"><img src="assets/teamwork.jpg" alt="teamwork"></div><div class="soft-name">TeamWork</div><div class="soft-desc">Berhasil memimpin team menjadi juara.</div></div>
     </div>
 </section>
 
@@ -790,17 +840,13 @@ footer a:hover { color: white; }
       </div>
     </div>
     <div class="contact-right">
-      <h3 class="form-heading">Kirim Pesan</h3>
-      <p class="form-sub">Isi formulir di bawah ini dan saya akan membalas sesegera mungkin.</p>
-      <div class="form-row">
-        <div class="form-group"><label class="form-label">Nama</label><input type="text" class="form-input" id="inputName" placeholder="Nama kamu" /></div>
-        <div class="form-group"><label class="form-label">Email / WA</label><input type="text" class="form-input" id="inputEmail" placeholder="email atau nomer WA" /></div>
-      </div>
-      <div class="form-group"><label class="form-label">Subjek</label><input type="text" class="form-input" id="inputSubject" placeholder="Tentang apa?" /></div>
-      <div class="form-group"><label class="form-label">Pesan</label><textarea class="form-textarea" id="inputMessage" placeholder="Ceritakan lebih lanjut..."></textarea></div>
-      <button class="submit-btn" onclick="handleSubmit()">Kirim Pesan ✉️</button>
-      <div class="success-msg" id="successMsg">✅ Pesan berhasil disiapkan! Silakan kirim via WhatsApp atau email yang terbuka.</div>
+  <div class="contact-photo-wrap">
+    <img src="assets/ganteng.jpg" alt="Achmad Sofyan Hakiki">
+    <div class="contact-photo-overlay">
+      <div class="contact-photo-tag">📍 Jember, Jawa Timur</div>
+      <div class="contact-photo-tag">✅ Open for Work</div>
     </div>
+   </div>
   </div>
 </section>
 
@@ -920,6 +966,36 @@ function handleSubmit() {
   window.open(`https://wa.me/6281649321371?text=${waText}`, '_blank');
   document.getElementById('successMsg').style.display = 'block';
 }
+// ---- Counter animation ----
+function animateCounter(el, target, duration = 1500) {
+  let start = 0;
+  const step = target / (duration / 16);
+  const update = () => {
+    start += step;
+    if (start < target) {
+      el.textContent = Math.floor(start) + '+';
+      requestAnimationFrame(update);
+    } else {
+      el.textContent = target + '+';
+    }
+  };
+  requestAnimationFrame(update);
+}
+
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.achieve-val').forEach(el => {
+        const target = parseInt(el.textContent);
+        animateCounter(el, target);
+      });
+      counterObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+const achieveGrid = document.querySelector('.achieve-grid');
+if (achieveGrid) counterObserver.observe(achieveGrid);
 </script>
 </body>
 </html>
