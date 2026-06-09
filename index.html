@@ -530,7 +530,20 @@ footer a:hover { color: white; }
 </style>
 </head>
 <body>
-
+<!-- ====== INTRO SPLASH ====== -->
+<div id="introScreen" style="position:fixed;inset:0;z-index:9999;background:#2e3a18;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;">
+  <div id="introLines" style="display:flex;flex-direction:column;align-items:center;gap:0.5rem;margin-bottom:2.5rem;">
+    <span class="intro-word" style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,6vw,5rem);color:#f5f2eb;letter-spacing:0.12em;opacity:0;transform:translateY(30px);transition:all 0.6s cubic-bezier(.4,0,.2,1);">Web Developer</span>
+    <span class="intro-word" style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,6vw,5rem);color:#7a9640;letter-spacing:0.12em;opacity:0;transform:translateY(30px);transition:all 0.6s cubic-bezier(.4,0,.2,1);">Mobile Developer</span>
+    <span class="intro-word" style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,6vw,5rem);color:#f5f2eb;letter-spacing:0.12em;opacity:0;transform:translateY(30px);transition:all 0.6s cubic-bezier(.4,0,.2,1);">IoT Engineer</span>
+    <span class="intro-word" style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,6vw,5rem);color:#7a9640;letter-spacing:0.12em;opacity:0;transform:translateY(30px);transition:all 0.6s cubic-bezier(.4,0,.2,1);">IT Support</span>
+    <span class="intro-word" style="font-family:'Bebas Neue',sans-serif;font-size:clamp(2rem,6vw,5rem);color:#f5f2eb;letter-spacing:0.12em;opacity:0;transform:translateY(30px);transition:all 0.6s cubic-bezier(.4,0,.2,1);">Networking</span>
+  </div>
+  <div id="introName" style="font-family:'Bebas Neue',sans-serif;font-size:clamp(1rem,2.5vw,1.6rem);color:rgba(245,242,235,0.4);letter-spacing:0.3em;text-transform:uppercase;opacity:0;transition:opacity 0.8s ease;">Achmad Sofyan Hakiki, A.Md.T.</div>
+  <div id="introBar" style="margin-top:2.5rem;width:200px;height:2px;background:rgba(255,255,255,0.1);border-radius:2px;overflow:hidden;">
+    <div id="introProgress" style="height:100%;width:0%;background:#7a9640;transition:width 0.1s linear;"></div>
+  </div>
+</div>
 <div class="scroll-progress" id="scrollProgress"></div>
 <div class="bg-text" id="bgText">Achmad Sofyan Hakiki</div>
 
@@ -564,7 +577,7 @@ footer a:hover { color: white; }
   </div>
   <div class="hero-visual">
     <div class="stat-card"><div class="stat-num">13+</div><div class="stat-label">Projects selesai</div></div>
-    <div class="stat-card"><div class="stat-num">8</div><div class="stat-label">Website klinik</div></div>
+    <div class="stat-card"><div class="stat-num">8</div><div class="stat-label">Website klinik Se Jawa Timur</div></div>
     <div class="stat-card"><div class="stat-num">5+</div><div class="stat-label">Penghargaan</div></div>
     <div class="photo-frame">
         <img src="assets/fotoijo.jpeg" alt="Achmad Sofyan Hakiki">
@@ -588,13 +601,13 @@ footer a:hover { color: white; }
         <div class="profile-photo">
         <img src="assets/fotowis.jpeg" alt="Achmad Sofyan Hakiki">
         </div>
-        <div class="info-item"><div class="info-label">Nama lengkap</div><div class="info-value">Achmad Sofyan Hakiki</div></div>
+        <div class="info-item"><div class="info-label">Nama lengkap</div><div class="info-value">Achmad Sofyan Hakiki, A.Md.T.</div></div>
         <div class="info-item"><div class="info-label">Domisili</div><div class="info-value">Jember, Jawa Timur</div></div>
         <div class="info-item"><div class="info-label">Email</div><div class="info-value">fyanhakiki@gmail.com</div></div>
         <div class="info-item"><div class="info-label">Telepon</div><div class="info-value">081649321371</div></div>
         <div class="info-item"><div class="info-label">Instagram</div><div class="info-value">@sfyaan._</div></div>
         <div class="info-item"><div class="info-label">Linkedln</div><div class="info-value">Achmad Sofyan Hakiki</div></div>
-        <div class="info-item"><div class="info-label">Status</div><div class="info-value">Open for work ✓</div></div>
+        <div class="info-item"><div class="info-label">Status</div><div class="info-value">Open to work ✓</div></div>
         <div class="tag-list">
           <span class="tag">IoT</span><span class="tag">Web Dev</span><span class="tag">Mobile Dev</span>
           <span class="tag">Networking</span><span class="tag">UI/UX</span><span class="tag">Admin</span>
@@ -675,7 +688,7 @@ footer a:hover { color: white; }
 </div>
     <div class="section-label reveal fade-right">Soft Skill</div>
     <div class="soft-grid reveal">
-    <div class="soft-card"><div class="soft-icon"><img src="assets/sepaking.jpg" alt="Public Speaking"></div><div class="soft-name">Public Speaking</div><div class="soft-desc">Terbiasa presentasi dan menjadi narasumber di berbagai acara kampus dan pelatihan.</div></div>
+    <div class="soft-card"><div class="soft-icon"><img src="assets/sepaking.jpg" alt="Public Speaking"></div><div class="soft-name">Public Speaking</div><div class="soft-desc">Terbiasa presentasi dan menjadi MC di berbagai acara kampus dan pelatihan.</div></div>
     <div class="soft-card"><div class="soft-icon"><img src="assets/berpikirkreatif.jpeg" alt="Berpikir Kreatif"></div><div class="soft-name">Berpikir Kreatif</div><div class="soft-desc">Mampu menghadirkan solusi inovatif untuk tantangan teknis maupun non-teknis.</div></div>
     <div class="soft-card"><div class="soft-icon"><img src="assets/kepemimpinan.jpeg" alt="Kepemimpinan"></div><div class="soft-name">Kepemimpinan</div><div class="soft-desc">Berpengalaman memimpin tim dan berkoordinasi dengan stakeholder proyek.</div></div>
     <div class="soft-card"><div class="soft-icon"><img src="assets/benerin.jpeg" alt="Kolaborasi"></div><div class="soft-name">Troubleshooter</div><div class="soft-desc">Terbiasa memaintenance jaringan dan juga perangkat keras yang ada dikampus.</div></div>
@@ -801,10 +814,6 @@ footer a:hover { color: white; }
         <div class="project-body"><div class="project-name">Website Absensi SMPN 1 & 3 Jember</div><div class="project-desc">Platform absensi web resmi untuk dua sekolah negeri di Jember. Dashboard admin, statistik kehadiran, dan integrasi dengan sistem RFID.</div><div class="project-stack"><span class="stack-tag">CodeIgniter</span><span class="stack-tag">MySQL</span><span class="stack-tag">Bootstrap</span><span class="stack-tag">RFID</span></div></div>
       </div>
       <div class="project-card reveal" data-category="web">
-        <div class="project-thumb thumb-web"><span class="thumb-icon">🏗️</span><span class="thumb-badge">Web</span></div>
-        <div class="project-body"><div class="project-name">Website PT. Prambanan Beton</div><div class="project-desc">Website company profile PT. Prambanan Beton dengan katalog produk beton ready mix (K-225, K-300, K-400, K-500) dan sistem penawaran harga.</div><div class="project-stack"><span class="stack-tag">Next.js</span><span class="stack-tag">Tailwind</span><span class="stack-tag">Company Profile</span></div></div>
-      </div>
-      <div class="project-card reveal" data-category="web">
         <div class="project-thumb thumb-web"><span class="thumb-icon">🎵</span><span class="thumb-badge">Web App</span></div>
         <div class="project-body"><div class="project-name">Website Tiket Konser JTI</div><div class="project-desc">Platform booking tiket konser online dengan sistem pemilihan kelas tiket (Reguler, VIP, VVIP), benefit per kelas, dan alur pembelian yang mudah.</div><div class="project-stack"><span class="stack-tag">CodeIgniter</span><span class="stack-tag">MySQL</span><span class="stack-tag">Payment Gateway</span></div></div>
       </div>
@@ -892,7 +901,7 @@ footer a:hover { color: white; }
     <img src="assets/ganteng.jpg" alt="Achmad Sofyan Hakiki">
     <div class="contact-photo-overlay">
       <div class="contact-photo-tag">📍 Jember, Jawa Timur</div>
-      <div class="contact-photo-tag">✅ Open for Work</div>
+      <div class="contact-photo-tag">✅ Open to Work</div>
     </div>
    </div>
   </div>
@@ -910,6 +919,58 @@ footer a:hover { color: white; }
 </footer>
 
 <script>
+// ====== INTRO SPLASH ======
+(function() {
+  const words = document.querySelectorAll('.intro-word');
+  const name = document.getElementById('introName');
+  const bar = document.getElementById('introProgress');
+  const screen = document.getElementById('introScreen');
+  
+  let totalDuration = 3800; // total ms sebelum masuk halaman
+  let elapsed = 0;
+  
+  // Animasi progress bar
+  const barInterval = setInterval(() => {
+    elapsed += 50;
+    bar.style.width = Math.min((elapsed / totalDuration) * 100, 100) + '%';
+    if (elapsed >= totalDuration) clearInterval(barInterval);
+  }, 50);
+
+  // Munculkan tiap kata satu per satu
+  words.forEach((word, i) => {
+    setTimeout(() => {
+      word.style.opacity = '1';
+      word.style.transform = 'translateY(0)';
+    }, 200 + i * 350);
+
+    // Hilangkan kata sebelumnya (efek berganti)
+    if (i > 0) {
+      setTimeout(() => {
+        words[i - 1].style.opacity = '0.15';
+        words[i - 1].style.transform = 'translateY(-10px)';
+      }, 200 + i * 350 - 100);
+    }
+  });
+
+  // Munculkan nama
+  setTimeout(() => {
+    name.style.opacity = '1';
+  }, 200 + words.length * 350);
+
+  // Fade out intro, masuk halaman
+  setTimeout(() => {
+    screen.style.transition = 'opacity 0.7s ease, transform 0.7s ease';
+    screen.style.opacity = '0';
+    screen.style.transform = 'scale(1.04)';
+    setTimeout(() => {
+      screen.style.display = 'none';
+      document.body.style.overflow = '';
+    }, 700);
+  }, totalDuration);
+
+  // Kunci scroll selama intro
+  document.body.style.overflow = 'hidden';
+})();
 // ---- NAV active on scroll ----
 const sections = ['home','about','skills','experience','projects','certifications','contact'];
 const navLinks = document.querySelectorAll('.nav-links a');
