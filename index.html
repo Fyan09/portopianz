@@ -275,22 +275,196 @@ section { position: relative; z-index: 1; }
 .filter-btn:hover { border-color: var(--olive); color: var(--olive); }
 .filter-btn.active { background: var(--olive); color: white; border-color: var(--olive); }
 .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 4rem; }
-.project-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.06); transition: all 0.35s; cursor: pointer; display: flex; flex-direction: column; }
+.project-card {
+  background: white;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+  transition: all 0.35s;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
 .project-card:hover { transform: translateY(-8px); box-shadow: 0 20px 50px rgba(74,94,42,0.15); }
 .project-card.hidden { display: none; }
-.project-thumb { height: 180px; display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
-.thumb-mobile { background: linear-gradient(135deg, #1e3a5f, #2563a8); }
-.thumb-web { background: linear-gradient(135deg, #2e3a18, #4a5e2a); }
-.thumb-iot { background: linear-gradient(135deg, #1a1a2e, #16213e); }
-.thumb-icon { font-size: 3.5rem; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.3)); transition: transform 0.3s; }
-.project-card:hover .thumb-icon { transform: scale(1.15) rotate(5deg); }
-.thumb-badge { position: absolute; top: 12px; right: 12px; padding: 4px 10px; border-radius: 50px; font-size: 0.65rem; font-weight: 500; background: rgba(255,255,255,0.15); color: white; backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.2); letter-spacing: 0.08em; text-transform: uppercase; }
-.project-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
-.project-name { font-size: 1rem; font-weight: 500; color: var(--charcoal); margin-bottom: 6px; }
-.project-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; flex: 1; }
-.project-stack { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid var(--stone); }
-.stack-tag { padding: 3px 10px; border-radius: 50px; font-size: 0.68rem; font-weight: 500; background: rgba(74,94,42,0.07); color: var(--olive); }
+.project-cover{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+    display:block;
+}
 
+.project-thumb{
+    position:relative;
+    overflow:hidden;
+}
+
+.project-thumb img{
+    transition:0.4s ease;
+}
+
+.project-card:hover .project-thumb img{
+    transform:scale(1.05);
+}
+.project-thumb-stack{
+    position:relative;
+    height:220px;
+    overflow:hidden;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding-top:15px;
+}
+.stack-img{
+    position:absolute;
+
+    width:75%;
+    border-radius:12px;
+
+    background:none;
+    box-shadow:none;
+
+    transition:.4s ease;
+}
+.stack-1{
+    top:25px;
+    left:50%;
+    transform:
+      translateX(-50%)
+      rotate(-6deg);
+
+    opacity:.55;
+}
+.stack-2{
+    top:15px;
+    left:50%;
+    transform:
+      translateX(-50%)
+      rotate(4deg);
+
+    opacity:.75;
+}
+.stack-3{
+    top:5px;
+    left:50%;
+
+    transform:
+      translateX(-50%);
+
+    opacity:1;
+}
+.project-card:hover .stack-1{
+    transform:
+      translateX(-70%)
+      rotate(-12deg)
+      translateY(-8px);
+}
+
+.project-card:hover .stack-2{
+    transform:
+      translateX(-25%)
+      rotate(8deg)
+      translateY(-15px);
+}
+
+.project-card:hover .stack-3{
+    transform:
+      translateX(-50%)
+      translateY(-20px)
+      scale(1.03);
+}
+.project-card:hover .thumb-icon { transform: scale(1.15) rotate(5deg); }
+.thumb-badge { position: absolute; top: 12px; right: 12px; padding: 4px 10px; border-radius: 50px; font-size: 0.65rem; font-weight: 500; background: rgba(52, 108, 41, 0.584); color: white; backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.2); letter-spacing: 0.08em; text-transform: uppercase; }
+.project-body{
+    background:#4f6b2d;
+    color:white;
+
+    padding:1.5rem;
+    flex:1;
+    display:flex;
+    flex-direction:column;
+}
+.project-name{
+    font-size:1.2rem;
+    font-weight:700;
+    color:white;
+    margin-bottom:10px;
+}
+.project-desc{
+    font-size:0.9rem;
+    color:rgba(255,255,255,.85);
+    line-height:1.8;
+    flex:1;
+}
+.project-stack{
+    display:flex;
+    flex-wrap:wrap;
+    gap:5px;
+
+    margin-top:1rem;
+    padding-top:1rem;
+
+    border-top:1px solid rgba(255,255,255,.15);
+}
+.stack-tag{
+    padding:6px 12px;
+    border-radius:999px;
+
+    font-size:.75rem;
+    font-weight:500;
+
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.08);
+
+    color:rgba(255,255,255,.9);
+
+    backdrop-filter:blur(8px);
+}
+.thumb-logo{
+    width:100px;
+    height:100px;
+    border-radius:50%;
+    overflow:hidden;
+    margin:auto;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    background:#fff;
+    box-shadow:0 4px 15px rgba(0,0,0,.2);
+}
+
+.thumb-logo img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+.thumb-logo-multi{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+
+    width:100%;
+    height:100px;
+}
+
+.thumb-logo-multi img{
+    width:65px;
+    height:65px;
+
+    border-radius:50%;
+    background:#fff;
+    padding:5px;
+
+    object-fit:contain;
+
+    box-shadow:0 4px 15px rgba(0,0,0,.2);
+}
 /* ============ CERTIFICATIONS ============ */
 .achieve-featured { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25rem; margin-bottom: 4rem; }
 .ach-card { border-radius: 20px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.08); transition: all 0.3s; cursor: default; position: relative; }
@@ -316,7 +490,46 @@ section { position: relative; z-index: 1; }
 .cert-issuer { font-size: 0.75rem; color: var(--olive); font-weight: 500; }
 .cert-date { font-size: 0.72rem; color: var(--text-muted); margin-top: auto; }
 .cert-badge { display: inline-block; padding: 3px 10px; border-radius: 50px; font-size: 0.65rem; font-weight: 500; background: rgba(74,94,42,0.08); color: var(--olive); width: fit-content; }
+.cert-timeline{
+    display:flex;
+    gap:24px;
+    overflow-x:auto;
+    padding-bottom:10px;
+}
 
+.cert-year{
+    min-width:320px;
+    background:white;
+    border-radius:24px;
+    padding:24px;
+    box-shadow:0 5px 20px rgba(0,0,0,.05);
+}
+
+.year-title{
+    font-size:2rem;
+    font-weight:800;
+    color:var(--olive);
+    margin-bottom:20px;
+}
+
+.cert-item{
+    padding:16px 0;
+    border-bottom:1px solid #eee;
+}
+
+.cert-item:last-child{
+    border-bottom:none;
+}
+
+.cert-item button{
+    background:none;
+    border:none;
+    color:var(--olive);
+    font-weight:600;
+    cursor:pointer;
+    padding:0;
+    margin-top:6px;
+}
 /* ============ CONTACT ============ */
 #contact .contact-inner {
   display: grid; grid-template-columns: 1fr 1fr; min-height: 80vh; overflow: hidden;
@@ -527,6 +740,175 @@ footer a:hover { color: white; }
   box-shadow: 0 12px 30px rgba(74,94,42,0.15);
   border-color: var(--olive);
 }
+/* ===== MODAL PROJECT ===== */
+.project-detail-btn{
+    margin-top:20px;
+    background:white;
+    color:#4f6b2d;
+    font-weight:700;
+    border:none;
+    border-radius:12px;
+    padding:14px;
+}
+.project-detail-btn:hover{
+    transform:translateY(-2px);
+}
+
+.project-detail-btn:hover{
+  background:var(--olive-dark);
+}
+
+.modal{
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.85);
+  z-index:9999;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+  overflow-y:auto;
+}
+
+.modal-content{
+  background:white;
+  width:100%;
+  max-width:900px;
+  border-radius:20px;
+  position:relative;
+  max-height:90vh;
+  overflow-y:auto;
+}
+
+.modal-content img{
+  width:100%;
+  max-height:500px;
+  object-fit:cover;
+}
+
+.modal-body{
+  padding:25px;
+}
+
+.close-modal{
+  position:absolute;
+  top:15px;
+  right:20px;
+  color:white;
+  font-size:35px;
+  cursor:pointer;
+}
+
+/* khusus mobile app */
+.mobile-preview{
+  text-align:center;
+}
+
+.mobile-preview img{
+  width:280px;
+  border-radius:25px;
+  border:8px solid #222;
+  margin:20px auto;
+}
+
+/* sertifikat */
+.cert-card{
+  cursor:pointer;
+}
+
+.cert-modal img{
+  width:90%;
+  max-width:1000px;
+  border-radius:15px;
+}
+.slider-container{
+  position:relative;
+  text-align:center;
+  background:#f8f8f8;
+  padding:20px;
+}
+
+#sliderImage{
+  max-width:100%;
+  max-height:500px;
+  border-radius:20px;
+}
+
+.slider-btn{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  width:45px;
+  height:45px;
+  border:none;
+  border-radius:50%;
+  cursor:pointer;
+  background:white;
+  font-size:20px;
+  box-shadow:0 4px 10px rgba(0,0,0,.2);
+}
+
+.left{
+  left:15px;
+}
+
+.right{
+  right:15px;
+}
+.mobile-screen{
+  width:280px !important;
+  max-height:650px !important;
+  object-fit:contain;
+  border:8px solid #111;
+  border-radius:30px;
+  margin:auto;
+  display:block;
+}
+.web-screen{
+  width:100%;
+  max-width:1000px;
+  border:12px solid #222;
+  border-radius:15px;
+  padding:4px;
+  background:white;
+  box-shadow:0 10px 30px rgba(0,0,0,.2);
+}
+#projectDesc{
+    line-height:1.8;
+    color:#555;
+}
+
+#projectDesc hr{
+    margin:20px 0;
+    border:none;
+    border-top:1px solid #ddd;
+}
+
+#projectDesc h4{
+    margin:15px 0 10px;
+    color:#222;
+}
+
+#projectDesc ul{
+    margin:0;
+    padding-left:20px;
+}
+
+#projectDesc li{
+    margin-bottom:6px;
+}
+.cert-content{
+  background:transparent;
+  box-shadow:none;
+  max-width:1000px;
+}
+
+#certImage{
+  width:100%;
+  max-height:90vh;
+  object-fit:contain;
+  border-radius:15px;
+}
 </style>
 </head>
 <body>
@@ -587,7 +969,6 @@ footer a:hover { color: white; }
 </section>
 
 <!-- ====== ABOUT ====== -->
-<div class="section-divider"><p>→ About Me</p><span class="divider-scroll">scroll terus kebawah ↓</span></div>
 <section id="about">
   <div class="section-header reveal fade-up">
     <div class="section-header-bg">ABOUT ME</div>
@@ -646,7 +1027,6 @@ footer a:hover { color: white; }
 </section>
 
 <!-- ====== SKILLS ====== -->
-<div class="section-divider"><p>→ Skills</p><span class="divider-scroll">scroll terus kebawah ↓</span></div>
 <section id="skills">
   <div class="section-header reveal fade-up">
     <div class="section-header-bg">SKILLS</div>
@@ -698,7 +1078,6 @@ footer a:hover { color: white; }
 </section>
 
 <!-- ====== EXPERIENCE ====== -->
-<div class="section-divider"><p>→ Experience</p><span class="divider-scroll">scroll terus kebawah ↓</span></div>
 <section id="experience">
   <div class="section-header">
     <div class="section-header-bg">EXPERIENCE</div>
@@ -772,7 +1151,6 @@ footer a:hover { color: white; }
 </section>
 
 <!-- ====== PROJECTS ====== -->
-<div class="section-divider"><p>→ Projects</p><span class="divider-scroll">scroll terus kebawah ↓</span></div>
 <section id="projects">
   <div class="section-header">
     <div class="section-header-bg">PROJECTS</div>
@@ -789,44 +1167,828 @@ footer a:hover { color: white; }
   <div class="content-wide">
     <div class="section-label reveal">13+ Projects — Mobile, Web & IoT</div>
     <div class="projects-grid">
-      <div class="project-card reveal" data-category="mobile iot">
-        <div class="project-thumb thumb-iot"><span class="thumb-icon">🌡️</span><span class="thumb-badge">Mobile + IoT</span></div>
-        <div class="project-body"><div class="project-name">Monitoring Suhu Real-time</div><div class="project-desc">Sistem monitoring suhu berbasis IoT dengan integrasi aplikasi mobile real-time. Sensor suhu terhubung ke cloud dan ditampilkan di aplikasi dengan histori data dan notifikasi.</div><div class="project-stack"><span class="stack-tag">Flutter</span><span class="stack-tag">IoT</span><span class="stack-tag">Firebase</span><span class="stack-tag">Arduino</span></div></div>
+    <div class="project-card reveal" data-category="web iot">
+        <div class="project-thumb-stack">
+          <img src="assets/projects/suhu1.jpg"
+              class="stack-img stack-1">
+          <img src="assets/projects/suhu2.jpg"
+              class="stack-img stack-2">
+          <img src="assets/projects/suhu3.jpg"
+              class="stack-img stack-3">
+          <span class="thumb-badge">
+            WEBSITE + IOT
+          </span>
       </div>
-      <div class="project-card reveal" data-category="mobile iot">
-        <div class="project-thumb thumb-iot"><span class="thumb-icon">🐠</span><span class="thumb-badge">Mobile + IoT</span></div>
-        <div class="project-body"><div class="project-name">Smart Aqua — Monitoring Aquascape</div><div class="project-desc">Sistem monitoring aquascape IoT dengan pemantauan suhu, pH, dan turbiditas air via cloud. Dikembangkan untuk program Wirausaha Merdeka Kampus (WMK).</div><div class="project-stack"><span class="stack-tag">Flutter</span><span class="stack-tag">ESP32</span><span class="stack-tag">Firebase</span><span class="stack-tag">Cloud</span></div></div>
+
+      <div class="project-body">
+        <div class="project-name">Monitoring Suhu Real-time</div>
+
+        <div class="project-desc">
+          Sistem monitoring suhu berbasis IoT dengan integrasi aplikasi website real-time.
+          Sensor suhu terhubung ke cloud dan ditampilkan di aplikasi dengan histori data dan notifikasi.
+        </div>
+
+        <div class="project-stack">
+          <span class="stack-tag">ESP32</span>
+          <span class="stack-tag">DHT11</span>
+          <span class="stack-tag">IoT</span>
+          <span class="stack-tag">MySQL</span>
+          <span class="stack-tag">JavaScript</span>
+        </div>
+
+        <button
+          class="project-detail-btn"
+          onclick="openProject(
+          [
+          {
+          src:'assets/projects/suhu1.jpg',
+          type:'mobile'
+          },
+          {
+          src:'assets/projects/suhu2.jpg',
+          type:'mobile'
+          },
+          {
+          src:'assets/projects/suhu3.jpg',
+          type:'mobile'
+          }
+
+          ],
+          'Sistem Monitoring Suhu dan Kelembaban Berbasis Web',
+          'ESP32 • DHT11 • PHP • MySQL • JavaScript • IoT',
+          'Sistem Monitoring Suhu dan Kelembaban berbasis Internet of Things (IoT) yang dirancang untuk memantau kondisi lingkungan secara real-time melalui platform web.' +
+          ' Sistem menggunakan sensor DHT11 untuk mengukur suhu dan kelembaban udara. Data yang diperoleh kemudian dikirim oleh perangkat IoT ke server dan ditampilkan pada website monitoring sehingga pengguna dapat memantau kondisi lingkungan dari berbagai perangkat yang terhubung ke jaringan.' +
+          ' Selain menampilkan data secara real-time, sistem juga menyimpan histori pengukuran yang dapat digunakan untuk analisis dan evaluasi kondisi lingkungan dalam periode tertentu. Dengan adanya sistem ini, proses monitoring menjadi lebih mudah, cepat, dan efisien dibandingkan pencatatan secara manual.' +
+
+          '<hr>' +
+
+          '<h4>Fitur Utama</h4>' +
+
+          '<ul>' +
+          '<li>Monitoring Suhu dan Kelembaban Secara Real-Time</li>' +
+          '<li>Dashboard Monitoring Berbasis Web</li>' +
+          '<li>Penyimpanan Histori Data Sensor</li>' +
+          '<li>Tampilan Grafik Monitoring</li>' +
+          '<li>Pembaruan Data Otomatis</li>' +
+          '<li>Akses Monitoring Melalui Browser</li>' +
+          '</ul>' +
+
+          '<h4>Hardware</h4>' +
+
+          '<ul>' +
+          '<li>ESP32</li>' +
+          '<li>Sensor DHT11</li>' +
+          '<li>Power Supply</li>' +
+          '</ul>' +
+
+          '<h4>Software</h4>' +
+
+          '<ul>' +
+          '<li>PHP</li>' +
+          '<li>MySQL</li>' +
+          '<li>HTML</li>' +
+          '<li>CSS</li>' +
+          '<li>JavaScript</li>' +
+          '<li>Arduino IDE</li>' +
+          '</ul>'
+          )">
+          Lihat Detail
+        </button>
       </div>
-      <div class="project-card reveal" data-category="mobile iot">
-        <div class="project-thumb thumb-mobile"><span class="thumb-icon">🌧️</span><span class="thumb-badge">Mobile</span></div>
-        <div class="project-body"><div class="project-name">EcoMoni — Monitoring & Pendeteksi Hujan</div><div class="project-desc">Aplikasi monitoring lingkungan dengan pendeteksi curah hujan, monitoring suhu, dan histori data berbasis lokasi untuk wilayah Jember, Jawa Timur.</div><div class="project-stack"><span class="stack-tag">Flutter</span><span class="stack-tag">IoT Sensor</span><span class="stack-tag">Location API</span></div></div>
+    </div>
+    <div class="project-card reveal" data-category="mobile iot">
+        <div class="project-thumb-stack">
+          <img src="assets/projects/aqua3.jpg"
+              class="stack-img stack-1">
+          <img src="assets/projects/aqua1.jpg"
+              class="stack-img stack-2">
+          <img src="assets/projects/aqua5.jpg"
+              class="stack-img stack-3">
+          <span class="thumb-badge">
+            Mobile App + IOT
+          </span>
       </div>
-      <div class="project-card reveal" data-category="mobile iot">
-        <div class="project-thumb thumb-iot"><span class="thumb-icon">📲</span><span class="thumb-badge">Mobile + RFID</span></div>
-        <div class="project-body"><div class="project-name">Aplikasi Absensi SMPN 3 Jember</div><div class="project-desc">Sistem presensi siswa berbasis RFID terintegrasi dengan aplikasi mobile. Fitur presensi masuk/pulang, pengumuman, dan dashboard admin real-time.</div><div class="project-stack"><span class="stack-tag">Flutter</span><span class="stack-tag">RFID</span><span class="stack-tag">CodeIgniter</span><span class="stack-tag">MySQL</span></div></div>
+
+      <div class="project-body">
+        <div class="project-name">Smart Aqua - Monitoring Aquascape</div>
+        <div class="project-desc">
+          Sistem monitoring aquascape IoT dengan pemantauan suhu, pH, dan turbiditas air via cloud serta dapat melakukan kontrol dari jarak jauh dengan menekan tombol yang tersedia menggunakan aplikasi mobile .
+        </div>
+        <div class="project-stack">
+          <span class="stack-tag">Flutter</span>
+          <span class="stack-tag">ESP32</span>
+          <span class="stack-tag">Firebase</span>
+          <span class="stack-tag">Cloud</span>
+        </div>
+        <button
+          class="project-detail-btn"
+          onclick="openProject(
+          [
+          {
+          src:'assets/projects/aqua1.jpg',
+          type:'mobile',
+          },
+          {
+          src:'assets/projects/aqua2.jpg',
+          type:'mobile',
+          },
+          {
+          src:'assets/projects/aqua3.jpg',
+          type:'mobile',
+          },
+          {
+          src:'assets/projects/aqua4.jpg',
+          type:'mobile',
+          },
+          {
+          src:'assets/projects/aqua5.jpg',
+          type:'mobile',
+          },
+          {
+          src:'assets/projects/aqua6.jpg',
+          type:'mobile',
+          }
+          ],
+          'Smart Aqua',
+          'Flutter • ESP32 • Firebase • Cloud',
+          'SMART AQUA merupakan sistem Internet of Things (IoT) yang dirancang untuk membantu pemeliharaan aquascape secara otomatis dan efisien.' +
+          ' Sistem ini mampu memantau suhu, pH, kejernihan air, dan intensitas cahaya secara real-time melalui aplikasi Android.' +
+          ' Selain monitoring, sistem juga menyediakan kontrol otomatis maupun manual untuk lampu dan pendingin guna menjaga kondisi aquascape tetap optimal.' +
+
+          '<hr>' +
+
+          '<h4>Hardware</h4>' +
+
+          '<ul>' +
+          '<li>ESP32</li>' +
+          '<li>Sensor Suhu DS18B20</li>' +
+          '<li>Sensor pH Air</li>' +
+          '<li>Sensor Turbidity (Kejernihan Air)</li>' +
+          '<li>Sensor Intensitas Cahaya BH1750</li>' +
+          '<li>LCD 16x2 I2C</li>' +
+          '<li>Relay Module</li>' +
+          '<li>Lampu LED Aquascape</li>' +
+          '<li>Kipas Pendingin</li>' +
+          '</ul>' +
+
+          '<h4>Software</h4>' +
+
+          '<ul>' +
+          '<li>Flutter</li>' +
+          '<li>Firebase Realtime Database</li>' +
+          '<li>Arduino IDE</li>' +
+          '<li>Dart</li>' +
+          '<li>C++ (ESP32 Firmware)</li>' +
+          '</ul>',
+          )">
+          Lihat Detail
+        </button>
       </div>
+    </div>
+    
+    <div class="project-card reveal" data-category="mobile iot">
+      <div class="project-thumb-stack">
+          <img src="assets/projects/gaul5.png"
+              class="stack-img stack-1">
+          <img src="assets/projects/gaul1.png"
+              class="stack-img stack-2">
+          <img src="assets/projects/gaul11.jpg"
+              class="stack-img stack-3">
+          <span class="thumb-badge">
+            Mobile App + IOT
+          </span>
+      </div>
+
+      <div class="project-body">
+        <div class="project-name">Gaul Hidroponik - Monitoring Hidroponik</div>
+        <div class="project-desc">
+          Sistem monitoring tanaman hidroponik berbasis IoT dengan kontrol dan pemantauan kualitas Air, ppm, dan nutrisi dari air untuk tanaman hidroponik.
+        </div>
+
+        <div class="project-stack">
+          <span class="stack-tag">Flutter</span>
+          <span class="stack-tag">ESP32</span>
+          <span class="stack-tag">Firebase</span>
+          <span class="stack-tag">Cloud</span>
+        </div>
+
+        <button
+          class="project-detail-btn"
+          onclick="openProject(
+          [
+          {
+          src:'assets/projects/gaul1.png',
+          type:'mobile'
+          },
+          {
+          src:'assets/projects/gaul2.png',
+          type:'mobile'
+          },
+          {
+          src:'assets/projects/gaul3.png',
+          type:'mobile'
+          },
+          {
+          src:'assets/projects/gaul4.png',
+          type:'mobile'
+          },
+          {
+          src:'assets/projects/gaul5.png',
+          type:'mobile'
+          },
+          {
+          src:'assets/projects/gaul6.png',
+          type:'mobile'
+          },
+          {
+          src:'assets/projects/gaul7.png',
+          type:'mobile'
+          },
+          {
+          src:'assets/projects/gaul8.png',
+          type:'mobile'
+          },
+          {
+          src:'assets/projects/gaul9.jpg',
+          type:'mobile'
+          },
+          {
+          src:'assets/projects/gaul10.jpg',
+          type:'mobile'
+          },
+          {
+          src:'assets/projects/gaul11.jpg',
+          type:'mobile'
+          }
+          ],
+          'Gaul Hidroponik',
+          'Flutter • ESP32 • Firebase • Cloud',
+          'GAUL HIDROPONIK merupakan sistem Internet of Things (IoT) yang dirancang untuk membantu monitoring dan pengelolaan nutrisi pada tanaman hidroponik secara otomatis dan real-time.' +
+          ' Sistem ini mampu memantau nilai TDS (Total Dissolved Solid), volume air, serta ketersediaan nutrisi A dan nutrisi B melalui aplikasi Android yang terhubung dengan perangkat IoT.' +
+          ' Selain monitoring, sistem juga dapat mengontrol pompa nutrisi secara otomatis untuk menjaga konsentrasi nutrisi tetap optimal sehingga mendukung pertumbuhan tanaman hidroponik yang lebih efisien dan terkontrol.' +
+
+          '<hr>' +
+
+          '<h4>Hardware</h4>' +
+
+          '<ul>' +
+          '<li>ESP32</li>' +
+          '<li>Stepdown LM2596</li>' +
+          '<li>Sensor TDS (Total Dissolved Solid)</li>' +
+          '<li>Sensor Water Flow</li>' +
+          '<li>Sensor Level Air</li>' +
+          '<li>Pompa Nutrisi A</li>' +
+          '<li>Pompa Nutrisi B</li>' +
+          '<li>Pompa Sirkulasi Air</li>' +
+          '<li>Buck Converter</li>' +
+          '<li>Relay Module</li>' +
+          '<li>Tangki Nutrisi Hidroponik</li>' +
+          '</ul>' +
+
+          '<h4>Software</h4>' +
+
+          '<ul>' +
+          '<li>Flutter</li>' +
+          '<li>Firebase Realtime Database</li>' +
+          '<li>Arduino IDE</li>' +
+          '<li>Dart</li>' +
+          '<li>C++ (ESP32 Firmware)</li>' +
+          '</ul>',
+          )">
+          Lihat Detail
+        </button>
+      </div>
+    </div>
+
+    <div class="project-card reveal" data-category="mobile">
+      <div class="project-thumb-stack">
+          <img src="assets/projects/app31.png"
+              class="stack-img stack-1">
+          <img src="assets/projects/app31.png"
+              class="stack-img stack-2">
+          <img src="assets/projects/app31.png"
+              class="stack-img stack-3">
+          <span class="thumb-badge">
+            Mobile App
+          </span>
+      </div>
+
+      <div class="project-body">
+        <div class="project-name">Aplikasi Absensi Pegawai SMPN 3 Jember</div>
+
+        <div class="project-desc">
+          Aplikasi absensi Pegawai SMPN 3 Jember dengan kemampuan lokasi absen harus berada di sekolah dan dapat dipantau oleh wali murid.
+        </div>
+
+        <div class="project-stack">
+          <span class="stack-tag">Flutter</span>
+          <span class="stack-tag">MySQL</span>
+          <span class="stack-tag">Dart</span>
+          <span class="stack-tag">REST API</span>
+        </div>
+
+        <button
+          class="project-detail-btn"
+          onclick="openProject(
+          [
+          {
+          src:'assets/projects/app31.png',
+          type:'mobile'
+          }
+          ],
+          'Aplikasi Absensi Pegawai SMPN 3 Jember',
+          'Flutter • MySQL • Dart • REST  API',
+          'Sistem Absensi Pegawai SMP Negeri 3 Jember merupakan aplikasi mobile yang dikembangkan untuk memudahkan proses pencatatan kehadiran pegawai secara digital dan terintegrasi.' +
+          ' Aplikasi ini memungkinkan pegawai melakukan presensi masuk dan pulang langsung melalui perangkat Android, serta menampilkan informasi jadwal, riwayat presensi, pengumuman sekolah, dan status kehadiran secara real-time.' +
+          ' Seluruh proses presensi dilakukan melalui aplikasi sehingga mempermudah pengelolaan data kehadiran, meningkatkan efisiensi administrasi, dan mengurangi penggunaan sistem pencatatan manual.' +
+
+          '<hr>' +
+
+          '<h4>Fitur Utama</h4>' +
+
+          '<ul>' +
+          '<li>Presensi Masuk dan Presensi Pulang</li>' +
+          '<li>Riwayat Kehadiran Pegawai</li>' +
+          '<li>Monitoring Status Presensi Harian</li>' +
+          '<li>Informasi Lokasi Presensi</li>' +
+          '<li>Pengumuman dan Informasi Sekolah</li>' +
+          '<li>Jadwal Kerja Pegawai</li>' +
+          '<li>Profil dan Data Pegawai</li>' +
+          '</ul>' +
+
+          '<h4>Software</h4>' +
+
+          '<ul>' +
+          '<li>Flutter</li>' +
+          '<li>PHP Native</li>' +
+          '<li>MySQL</li>' +
+          '<li>Dart</li>' +
+          '<li>REST API</li>' +
+          '</ul>',
+          'mobile'
+          )">
+          Lihat Detail
+        </button>
+      </div>
+    </div>
       <div class="project-card reveal" data-category="mobile">
-        <div class="project-thumb thumb-mobile"><span class="thumb-icon">🏢</span><span class="thumb-badge">Mobile</span></div>
-        <div class="project-body"><div class="project-name">Aplikasi Absensi Kantor (E-Solusindo)</div><div class="project-desc">Sistem absensi pegawai berbasis mobile dengan fitur presensi masuk/pulang, tracking lokasi, dan manajemen pengumuman untuk kantor.</div><div class="project-stack"><span class="stack-tag">Flutter</span><span class="stack-tag">GPS</span><span class="stack-tag">REST API</span></div></div>
+      <div class="project-thumb-stack">
+          <img src="assets/projects/eso.png"
+              class="stack-img stack-1">
+          <img src="assets/projects/eso.png"
+              class="stack-img stack-2">
+          <img src="assets/projects/eso.png"
+              class="stack-img stack-3">
+          <span class="thumb-badge">
+            Mobile App
+          </span>
       </div>
+
+      <div class="project-body">
+        <div class="project-name">Aplikasi Absensi Kantor</div>
+
+        <div class="project-desc">
+          Aplikasi absensi Pegawai Kantor dengan kemampuan lokasi absen harus berada di kantor.
+        </div>
+
+        <div class="project-stack">
+          <span class="stack-tag">Flutter</span>
+          <span class="stack-tag">MySQL</span>
+          <span class="stack-tag">Dart</span>
+          <span class="stack-tag">REST API</span>
+        </div>
+
+        <button
+          class="project-detail-btn"
+          onclick="openProject(
+          [
+          {
+          src:'assets/projects/eso.png',
+          type:'mobile'
+          },
+          {
+          src:'assets/projects/eso2.png',
+          type:'web'
+          }
+          ],
+          'Aplikasi Absensi Kantor',
+          'Flutter • MySQL • Dart • REST  API',
+          'Sistem Absensi Karyawan merupakan aplikasi mobile yang dikembangkan untuk mendukung proses kehadiran pegawai secara digital di lingkungan perusahaan.' +
+          ' Aplikasi ini menyediakan autentikasi pengguna melalui akun karyawan dan terintegrasi dengan sistem backend perusahaan untuk pengelolaan data presensi secara terpusat.' +
+          ' Pada proyek ini saya terlibat dalam pengembangan aplikasi mobile menggunakan Flutter serta integrasi dengan layanan backend yang digunakan untuk kebutuhan operasional perusahaan. (AKSES LOGIN DI NONAKTIFKAN, Jadi ssan hanya bisa itu saja)' +
+
+          '<hr>' +
+
+          '<h4>Fitur Utama</h4>' +
+
+          '<ul>' +
+          '<li>Login dan Autentikasi Pengguna</li>' +
+          '<li>Manajemen Data Karyawan</li>' +
+          '<li>Sistem Presensi Digital</li>' +
+          '<li>Integrasi dengan Server Perusahaan</li>' +
+          '<li>Pengelolaan Data Kehadiran</li>' +
+          '</ul>' +
+
+          '<h4>Software</h4>' +
+
+          '<ul>' +
+          '<li>Flutter</li>' +
+          '<li>PHP</li>' +
+          '<li>MySQL</li>' +
+          '<li>Dart</li>' +
+          '<li>REST API</li>' +
+          '</ul>',
+          )">
+          Lihat Detail
+        </button>
+      </div>
+    </div>
       <div class="project-card reveal" data-category="web iot">
-        <div class="project-thumb thumb-web"><span class="thumb-icon">🏫</span><span class="thumb-badge">Web</span></div>
-        <div class="project-body"><div class="project-name">Website Absensi SMPN 1 & 3 Jember</div><div class="project-desc">Platform absensi web resmi untuk dua sekolah negeri di Jember. Dashboard admin, statistik kehadiran, dan integrasi dengan sistem RFID.</div><div class="project-stack"><span class="stack-tag">CodeIgniter</span><span class="stack-tag">MySQL</span><span class="stack-tag">Bootstrap</span><span class="stack-tag">RFID</span></div></div>
+      <div class="project-thumb-stack">
+          <img src="assets/projects/web1.png"
+              class="stack-img stack-1">
+          <img src="assets/projects/web4.png"
+              class="stack-img stack-2">
+          <img src="assets/projects/web2.png"
+              class="stack-img stack-3">
+          <span class="thumb-badge">
+            Website
+          </span>
       </div>
-      <div class="project-card reveal" data-category="web">
-        <div class="project-thumb thumb-web"><span class="thumb-icon">🎵</span><span class="thumb-badge">Web App</span></div>
-        <div class="project-body"><div class="project-name">Website Tiket Konser JTI</div><div class="project-desc">Platform booking tiket konser online dengan sistem pemilihan kelas tiket (Reguler, VIP, VVIP), benefit per kelas, dan alur pembelian yang mudah.</div><div class="project-stack"><span class="stack-tag">CodeIgniter</span><span class="stack-tag">MySQL</span><span class="stack-tag">Payment Gateway</span></div></div>
+
+        <div class="project-body"><div class="project-name">Website Absensi SMPN 1 & 3 Jember</div>
+        <div class="project-desc">Platform absensi web resmi untuk dua sekolah negeri di Jember. Dashboard admin, statistik kehadiran, dan integrasi dengan sistem RFID.</div>
+        <div class="project-stack">
+          <span class="stack-tag">CodeIgniter3</span>
+          <span class="stack-tag">MySQL</span>
+          <span class="stack-tag">Bootstrap</span>
+          <span class="stack-tag">C++</span>
+          <span class="stack-tag">RFID</span></div>
+        <button
+          class="project-detail-btn"
+          onclick="openProject(
+          [
+          {
+          src:'assets/projects/web1.png',
+          type:'web'
+          },
+          {
+          src:'assets/projects/web3.png',
+          type:'web'
+          },
+          {
+            src:'assets/projects/web4.png',
+            type:'web'
+          },
+          {
+            src:'assets/projects/web5.png',
+            type:'web'
+          },
+          {
+          src:'assets/projects/web2.png',
+          type:'mobile'
+          }
+          ],
+          'Website Absensi SMPN 1 & 3 Jember',
+          'CI3 • RFID • MySQL • C++',
+          'Sistem Absensi Siswa SMPN 1 dan SMPN 3 Jember merupakan platform berbasis web yang terintegrasi dengan teknologi RFID untuk mengelola kehadiran siswa secara digital dan real-time.' +
+          ' Siswa melakukan presensi dengan menempelkan kartu RFID pada perangkat pembaca yang terhubung ke sistem. Data kehadiran kemudian otomatis tersimpan ke database dan dapat dipantau melalui dashboard web oleh pihak sekolah.' +
+          ' Selain digunakan untuk pencatatan kehadiran, sistem juga menyediakan fitur registrasi kartu RFID. Guru atau administrator dapat mendaftarkan kartu RFID baru dan menghubungkannya dengan data siswa langsung melalui halaman web tanpa perlu melakukan konfigurasi manual pada perangkat.' +
+
+          '<hr>' +
+
+          '<h4>Fitur Utama</h4>' +
+
+          '<ul>' +
+          '<li>Presensi Siswa Menggunakan RFID</li>' +
+          '<li>Registrasi dan Manajemen Kartu RFID</li>' +
+          '<li>Manajemen Data Siswa</li>' +
+          '<li>Monitoring Kehadiran Secara Real-Time</li>' +
+          '<li>Rekapitulasi dan Laporan Presensi</li>' +
+          '<li>Dashboard Admin dan Guru</li>' +
+          '<li>Pencarian Riwayat Kehadiran Siswa</li>' +
+          '</ul>' +
+
+          '<h4>Hardware</h4>' +
+
+          '<ul>' +
+          '<li>ESP32</li>' +
+          '<li>PCB</li>' +
+          '<li>RFID RC522</li>' +
+          '<li>Kartu RFID</li>' +
+          '<li>Stepdown LM2596</li>' +
+          '<li>LCD I2C</li>' +
+          '</ul>' +
+
+          '<h4>Software</h4>' +
+
+          '<ul>' +
+          '<li>CodeIgniter 3</li>' +
+          '<li>C++</li>' +
+          '<li>PHP</li>' +
+          '<li>MySQL</li>' +
+          '<li>Bootstrap</li>' +
+          '<li>REST API</li>' +
+          '</ul>'
+          )">
+          Lihat Detail
+        </button>
       </div>
+    </div>
+      <div class="project-card reveal" data-category="web iot">
+        <div class="project-thumb-stack">
+          <img src="assets/sorta/sor1.png"
+              class="stack-img stack-1">
+          <img src="assets/sorta/sor6.jpg"
+              class="stack-img stack-2">
+          <img src="assets/sorta/sor7.jpg"
+              class="stack-img stack-3">
+          <span class="thumb-badge">
+            WEBSITE + IOT
+          </span>
+        </div>
+        <div class="project-body"><div class="project-name">Sortir Kualitas Telur Ayam Berbasis Arm Robot</div>
+        <div class="project-desc">Sistem Penyortiran Kualitas Telur Ayam Menggunakan teknologi deteksi Objek YOLO dan Klasifikasi CNN</div>
+        <div class="project-stack">
+          <span class="stack-tag">Next.js</span>
+          <span class="stack-tag">MySQL</span>
+          <span class="stack-tag">Server</span>
+          <span class="stack-tag">YOLO</span>
+          <span class="stack-tag">CNN</span>
+          <span class="stack-tag">C++</span></div>
+        <button
+          class="project-detail-btn"
+          onclick="openProject(
+          [
+          {
+          src:'assets/sorta/sor1.png',
+          type:'web'
+          },
+          {
+          src:'assets/sorta/sor2.png',
+          type:'web'
+          },
+          {
+          src:'assets/sorta/sor3.png',
+          type:'web'
+          },
+          {
+          src:'assets/sorta/sor4.jpg',
+          type:'web'
+          },
+          {
+          src:'assets/sorta/sor5.jpg',
+          type:'mobile'
+          },
+          {
+          src:'assets/sorta/sor6.jpg',
+          type:'mobile'
+          },
+          {
+          src:'assets/sorta/sor7.jpg',
+          type:'mobile'
+          },
+          {
+          src:'assets/sorta/sor8.jpg',
+          type:'mobile'
+          },
+          ],
+          'Sortir Kualitas Telur Ayam Berbasis Arm Robot',
+          'Next.js • Server • MySQL • YOLO • CNN • C++',
+          'Proyek ini membahas pengembangan sistem identifikasi dan pemilahan kualitas telur ayam berbasis computer vision yang dilengkapi dengan teknologi deteksi objek YOLO dan klasifikasi CNN.' +
+          ' Memanfaatkan ESP32-CAM sebagai perangkat pengambil citra telur secara real-time, yang kemudian dikirimkan melalui jaringan WiFi ke server untuk diproses oleh model YOLOv8 dan CNN guna mengklasifikasikan kualitas visual cangkang telur.' +
+          ' Selain analisis citra, sistem juga dilengkapi dengan sensor load cell dan modul HX711 untuk mengukur berat telur sebagai parameter pendukung dalam penentuan grade akhir. Hasil klasifikasi kemudian digunakan untuk menggerakkan robot arm secara otomatis guna memilah telur ke slot yang sesuai berdasarkan kategori Grade A, Grade B, Grade C, dan Tidak Layak. Seluruh data hasil pemilahan ditampilkan secara real-time melalui website monitoring berbasis Next.js sehingga proses sortasi dapat dipantau dan dievaluasi kapan saja.' +
+
+          '<hr>' +
+
+          '<h4>Fitur Utama</h4>' +
+
+          '<ul>' +
+          '<li>Deteksi dan Identifikasi Telur Menggunakan Computer Vision</li>' +
+          '<li>Klasifikasi Kualitas Telur Berbasis YOLO dan CNN</li>' +
+          '<li>Integrasi Data Berat dan Hasil Klasifikasi</li>' +
+          '<li>Pemilahan Telur Otomatis Menggunakan Conveyor dan Servo</li>' +
+          '<li>Dashboard Monitoring Berbasis Web</li>' +
+          '<li>Statistik dan Rekapitulasi Hasil Sortir</li>' +
+          '<li>Monitoring Real-Time Hasil Klasifikasi</li>' +
+          '<li>Penyimpanan Data Hasil Inspeksi</li>' +
+          '</ul>' +
+
+          '<h4>Hardware</h4>' +
+
+          '<ul>' +
+          '<li>ESP32</li>' +
+          '<li>Conveyor Mini</li>' +
+          '<li>IR Obstacle</li>' +
+          '<li>Kartu RFID</li>' +
+          '<li>ESP32-CAM</li>' +
+          '<li>HX711+Load Cell</li>' +
+          '<li>Step Dwon</li>' +
+          '<li>Adaptor</li>' +
+          '<li>Robot Arm</li>' +
+          '<li>Power Supply </li>' +
+          '<li>LED</li>' +
+          '</ul>' +
+
+          '<h4>Software</h4>' +
+
+          '<ul>' +
+          '<li>Next.js</li>' +
+          '<li>C++</li>' +
+          '<li>PHP</li>' +
+          '<li>MySQL</li>' +
+          '<li>Arduino IDE</li>' +
+          '<li>Python</li>' +
+          '</ul>'
+          )">
+          Lihat Detail
+        </button>
+      </div>
+    </div>
+
       <div class="project-card reveal" data-category="web">
-        <div class="project-thumb thumb-iot"><span class="thumb-icon">🏥</span><span class="thumb-badge">Web · 8 Klinik</span></div>
-        <div class="project-body"><div class="project-name">8 Website Klinik Jawa Timur</div><div class="project-desc">Mengembangkan dan mengelola 8 website klinik kesehatan di Jawa Timur dengan sistem manajemen konten, profil dokter, dan layanan digital.</div><div class="project-stack"><span class="stack-tag">CodeIgniter</span><span class="stack-tag">CMS</span><span class="stack-tag">MySQL</span><span class="stack-tag">UI/UX</span></div></div>
+      <div class="project-thumb-stack">
+          <img src="assets/klinik/k2.png"
+              class="stack-img stack-1">
+          <img src="assets/klinik/k2.png"
+              class="stack-img stack-2">
+          <img src="assets/klinik/k1.png"
+              class="stack-img stack-3">
+          <span class="thumb-badge">
+            Website
+          </span>
+      </div>
+        <div class="project-body"><div class="project-name">7 Website Klinik Jawa Timur</div>
+        <div class="project-desc">Mengembangkan dan mengelola 7 website klinik kesehatan di Jawa Timur dengan sistem manajemen konten, dan layanan digital.</div>
+        <div class="project-stack">
+          <span class="stack-tag">CodeIgniter</span>
+          <span class="stack-tag">CMS</span>
+          <span class="stack-tag">MySQL</span>
+          <span class="stack-tag">UI/UX</span></div>
+            <button
+            class="project-detail-btn"
+            onclick="openProject(
+            [
+            {
+            src:'assets/klinik/k2.png',
+            type:'web'
+            },
+            {
+            src:'assets/klinik/k3.png',
+            type:'web'
+            }
+            ],
+            'Layanan Klinik Digital',
+            'CI3 • CMS • MySQL • UI/UX',
+            'SIMETRIK merupakan sistem informasi rekam medis berbasis web yang digunakan untuk membantu proses pelayanan kesehatan, pengelolaan data pasien, serta pencatatan pemeriksaan medis secara digital pada klinik dan fasilitas kesehatan.' +
+            ' Sistem menyediakan berbagai fitur yang mendukung alur pelayanan pasien mulai dari pendaftaran, antrian, pemeriksaan dokter, pencatatan rekam medis, tindakan medis, hingga pengelolaan data kunjungan pasien secara terintegrasi dalam satu platform.' +
+
+            '<hr>' +
+            
+            '<h4>Klinik Diantaranya</h4>' +
+
+            '<ul>' +
+            '<li>Klinik Temu Waras</li>' +
+            '<li>Klinik Purwalisa Medika</li>' +
+            '<li>Rumah Sakit Cahaya Medika</li>' +
+            '<li>Klinik Bhakti Pratama</li>' +
+            '<li>Klinik Harapan Sehat</li>' +
+            '<li>Klinik Allkaff Medika</li>' +
+            '<li>Klinik Dokterku Taman Gading</li>' +
+            '</ul>' +
+
+            '<h4>Fitur Utama</h4>' +
+
+            '<ul>' +
+            '<li>Manajemen Data Pasien</li>' +
+            '<li>Pendaftaran dan Antrian Pasien</li>' +
+            '<li>Rekam Medis Elektronik (EMR)</li>' +
+            '<li>Pencatatan Pemeriksaan SOAP</li>' +
+            '<li>Manajemen Kunjungan Pasien</li>' +
+            '<li>Pengelolaan Tindakan Medis</li>' +
+            '<li>Laporan dan Monitoring Pelayanan Klinik</li>' +
+            '<li>Dashboard Tenaga Medis dan Administrasi</li>' +
+            '</ul>' +
+
+            '<h4>Software</h4>' +
+
+            '<ul>' +
+            '<li>CodeIgniter 3</li>' +
+            '<li>PHP</li>' +
+            '<li>MySQL</li>' +
+            '<li>Bootstrap</li>' +
+            '<li>JavaScript</li>' +
+            '<li>jQuery</li>' +
+            '</ul>'
+            )">
+            Lihat Detail
+          </button>
+        </div>
+      </div>
+      <div class="project-card reveal" data-category="mobile iot">
+        <div class="project-thumb-stack">
+          <img src="assets/sam/sam3.png"
+              class="stack-img stack-1">
+          <img src="assets/sam/sam2.png"
+              class="stack-img stack-2">
+          <img src="assets/sam/sam1.png"
+              class="stack-img stack-3">
+          <span class="thumb-badge">
+            MOBILE APP + IOT
+          </span>
+        </div>
+        <div class="project-body"><div class="project-name">RecyClean</div>
+        <div class="project-desc">Sistem Penyortiran Sampah Organik dan Anorganik Menggunakan Computer Vision YOLO</div>
+        <div class="project-stack">
+          <span class="stack-tag">Flutter</span>
+          <span class="stack-tag">Firebase</span>
+          <span class="stack-tag">ESP32</span>
+          <span class="stack-tag">Cloud</span></div>
+        <button
+          class="project-detail-btn"
+          onclick="openProject(
+          [
+          {
+          src:'assets/sam/sam1.png',
+          type:'mobile'
+          },
+          {
+          src:'assets/sam/sam2.png',
+          type:'mobile'
+          },
+          {
+          src:'assets/sam/sam3.png',
+          type:'mobile'
+          },
+          {
+          src:'assets/sam/sam4.png',
+          type:'mobile'
+          },
+          {
+          src:'assets/sam/sam5.png',
+          type:'mobile'
+          },
+          {
+          src:'assets/sam/sam6.png',
+          type:'mobile'
+          },
+          ],
+          'RecyClean - Smart Waste Management Application',
+          'Flutter • Firebase • ESP32 • IoT • Cloud',
+          'Proyek ini membahas pengembangan aplikasi mobile RecyClean yang dirancang untuk mendukung pengelolaan sampah berbasis teknologi IoT dan digitalisasi lingkungan. Aplikasi memungkinkan pengguna melakukan pemantauan, pencatatan, dan pengelolaan aktivitas pemilahan sampah secara lebih terstruktur melalui perangkat mobile.' +
+          ' Sistem terintegrasi dengan perangkat IoT berbasis ESP32 yang digunakan untuk mendukung proses monitoring tempat sampah pintar serta pengiriman data secara real-time ke cloud. Pengguna dapat memilih kategori sampah organik maupun anorganik, melihat riwayat aktivitas pembuangan sampah, menerima notifikasi pengingat, serta mengakses lokasi titik pengelolaan sampah melalui fitur peta digital.' +
+          ' Seluruh data aktivitas tersimpan secara cloud sehingga dapat dimonitor secara real-time dan digunakan sebagai media edukasi maupun peningkatan kesadaran masyarakat terhadap pentingnya pengelolaan sampah yang berkelanjutan.' +
+          '<hr>' +
+
+          '<h4>Fitur Utama</h4>' +
+
+          '<ul>' +
+          '<li>Autentikasi dan Login Pengguna</li>' +
+          '<li>Pemilahan Sampah Organik dan Anorganik</li>' +
+          '<li>Monitoring Data Tempat Sampah Berbasis IoT</li>' +
+          '<li>Riwayat Aktivitas Pengelolaan Sampah</li>' +
+          '<li>Notifikasi Pengingat dan Informasi Lingkungan</li>' +
+          '<li>Pemantauan Status Tempat Sampah Secara Real-Time</li>' +
+          '<li>Integrasi Lokasi Menggunakan Google Maps</li>' +
+          '<li>Penyimpanan Data Berbasis Cloud</li>' +
+          '<li>Dashboard Monitoring Melalui Aplikasi Mobile</li>' +
+          '</ul>' +
+
+          '<h4>Hardware</h4>' +
+
+          '<ul>' +
+          '<li>ESP32</li>' +
+          '<li>Sensor Ultrasonik HC-SR04</li>' +
+          '<li>Sensor Proximity</li>' +
+          '<li>Servo Motor</li>' +
+          '<li>LCD Display</li>' +
+          '<li>Power Supply</li>' +
+          '<li>Tempat Sampah</li>' +
+          '</ul>' +
+
+          '<h4>Software</h4>' +
+
+          '<ul>' +
+          '<li>Flutter</li>' +
+          '<li>Dart</li>' +
+          '<li>Firebase</li>' +
+          '<li>Cloud Firestore</li>' +
+          '<li>Arduino IDE</li>' +
+          '<li>Google Maps API</li>' +
+          '</ul>'
+          )">
+          Lihat Detail
+        </button>
+      </div>
+    </div>
+
+        </div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ====== CERTIFICATIONS ====== -->
-<div class="section-divider"><p>→ Certificates & Achievements</p><span class="divider-scroll">scroll terus kebawah ↓</span></div>
 <section id="certifications">
   <div class="section-header">
     <div class="section-header-bg">ACHIEVEMENT</div>
@@ -845,22 +2007,89 @@ footer a:hover { color: white; }
       <div class="ach-card card-gold"><div class="ach-card-inner"><div class="ach-rank">Juara 1</div><div class="ach-event">Olimpiade TIK Tingkat Kabupaten</div><div class="ach-org">Kabupaten Jember — SMA Level</div></div></div>
     </div>
     <div class="section-label reveal">Sertifikasi & Pelatihan</div>
-    <div class="cert-grid reveal">
-      <div class="cert-card"><div class="cert-name">Junior Cyber Security</div><div class="cert-issuer">BNSP (Badan Nasional Sertifikasi Profesi)</div><div class="cert-date">Politeknik Negeri Jember</div><span class="cert-badge">Kompetensi Nasional</span></div>
-      <div class="cert-card"><div class="cert-name">Teknik Kewirausahaan</div><div class="cert-issuer">Lembaga DP&MUBC</div><div class="cert-date">Politeknik Negeri Jember</div><span class="cert-badge">Kompetensi</span></div>
-      <div class="cert-card"><div class="cert-name">Kewirausahaan Industri — Level IV</div><div class="cert-issuer">BNSP</div><div class="cert-date">Desember 2024</div><span class="cert-badge">Kompetensi Nasional</span></div>
-      <div class="cert-card"><div class="cert-name">LKMM Tingkat Dasar (TD)</div><div class="cert-issuer">Bakor Pemandu POLIJE</div><div class="cert-date">Politeknik Negeri Jember</div><span class="cert-badge">Kepemimpinan</span></div>
-      <div class="cert-card"><div class="cert-name">LKMM Pra Tingkat Dasar</div><div class="cert-issuer">Bakor Pemandu POLIJE</div><div class="cert-date">Politeknik Negeri Jember</div><span class="cert-badge">Kepemimpinan</span></div>
-      <div class="cert-card"><div class="cert-name">Micro Skill Digital</div><div class="cert-issuer">Pusat PLD</div><div class="cert-date">Pelatihan Digital</div><span class="cert-badge">Digital Skills</span></div>
-      <div class="cert-card"><div class="cert-name">Training Public Speaking</div><div class="cert-issuer">FES × BEM FKIP UNEJ</div><div class="cert-date">Universitas Jember</div><span class="cert-badge">Soft Skill</span></div>
-      <div class="cert-card"><div class="cert-name">Pelatihan Entrepreneurship</div><div class="cert-issuer">FES × BEM FKIP UNEJ</div><div class="cert-date">Universitas Jember</div><span class="cert-badge">Entrepreneurship</span></div>
-      <div class="cert-card"><div class="cert-name">EPT — English Proficiency Test</div><div class="cert-issuer">UPA Bahasa POLIJE</div><div class="cert-date">Politeknik Negeri Jember</div><span class="cert-badge">Bahasa Inggris</span></div>
+    <div class="cert-timeline">
+        <div class="cert-year">
+          <div class="year-title">2025</div>
+          <div class="cert-item">
+            <div class="cert-name">Junior Cyber Scurity - BNSP</div>
+            <button onclick="openCertificate('assets/certificates/cyb.jpg')">
+              Lihat Sertifikat
+            </button>
+          </div>
+
+          <div class="cert-item">
+            <div class="cert-name">Junior Cyber Scurity - BPSDMP Surabaya</div>
+            <button onclick="openCertificate('assets/certificates/cyb2.jpg')">
+              Lihat Sertifikat
+            </button>
+          </div>
+          <div class="cert-item">
+            <div class="cert-name">Micro Skill Digital - Pusat Pengembangan Literasi Digital</div>
+            <button onclick="openCertificate('assets/certificates/mic.png')">
+              Lihat Sertifikat
+            </button>
+          </div>
+        </div>
+
+        <div class="cert-year">
+          <div class="year-title">2024</div>
+          <div class="cert-item">
+            <div class="cert-name">Kewirausahaan Industri</div>
+            <button onclick="openCertificate('assets/certificates/kwubnsp.jpg')">
+              Lihat Sertifikat
+            </button>
+          </div>
+          <div class="cert-item">
+            <div class="cert-name">LKMM TD - Bakor Pemandu POLIJE</div>
+            <button onclick="openCertificate('...')">
+              Lihat Sertifikat
+            </button>
+          </div>
+          <div class="cert-item">
+            <div class="cert-name">Teknik Kewirausahaan - Lembaga Diklat Profesi</div>
+            <button onclick="openCertificate('assets/certificates/wmk.png')">
+              Lihat Sertifikat
+            </button>
+          </div>
+        </div>
+
+        <div class="cert-year">
+        <div class="year-title">2023</div>
+
+        <div class="cert-item">
+          <div class="cert-name">LKMM Pra TD - Bakor Pemandu POLIJE</div>
+          <button onclick="openCertificate('assets/certificates/pratd.png')">
+            Lihat Sertifikat
+          </button>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-name">
+            Training Public Speaking - Future Entrepreneur Summit x BEM FKIP UNEJ
+          </div>
+          <button onclick="openCertificate('assets/certificates/pub.png')">
+            Lihat Sertifikat
+          </button>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-name">
+            ENTREPRENEURSHIP - Future Entrepreneur Summit x BEM FKIP UNEJ
+          </div>
+          <button onclick="openCertificate('assets/certificates/ent.png')">
+            Lihat Sertifikat
+          </button>
+        </div>
+
+      </div>
+
+      </div>
+
     </div>
   </div>
 </section>
 
 <!-- ====== CONTACT ====== -->
-<div class="section-divider"><p>→ Contact</p><span class="divider-scroll">scroll terus kebawah ↓</span></div>
 <section id="contact">
   <div class="contact-inner">
     <div class="contact-left">
@@ -1125,6 +2354,142 @@ document.addEventListener("DOMContentLoaded", function () {
   const elementsToReveal = document.querySelectorAll(".reveal");
   elementsToReveal.forEach(el => scrollRevealObserver.observe(el));
 });
+let currentImages = [];
+let currentSlide = 0;
+
+function updateSlide(){
+
+  const img = document.getElementById("sliderImage");
+
+  img.src = currentImages[currentSlide].src;
+
+  img.classList.remove(
+    "mobile-screen",
+    "web-screen"
+  );
+
+  if(currentImages[currentSlide].type === "mobile"){
+
+    img.classList.add("mobile-screen");
+
+  }else{
+
+    img.classList.add("web-screen");
+
+  }
+
+}
+
+function openProject(
+images,
+title,
+tech,
+desc
+){
+
+  currentImages = images;
+  currentSlide = 0;
+
+  updateSlide();
+
+  document.getElementById("projectTitle")
+  .innerText = title;
+
+  document.getElementById("projectTech")
+  .innerText = tech;
+
+  document.getElementById("projectDesc")
+  .innerHTML = desc;
+
+  document.getElementById("projectModal")
+  .style.display = "flex";
+
+}
+
+function closeProject(){
+
+  document.getElementById("projectModal")
+  .style.display = "none";
+
+}
+
+function nextSlide(){
+
+  currentSlide++;
+
+  if(currentSlide >= currentImages.length){
+    currentSlide = 0;
+  }
+
+  updateSlide();
+
+}
+
+function prevSlide(){
+
+  currentSlide--;
+
+  if(currentSlide < 0){
+    currentSlide = currentImages.length - 1;
+  }
+
+  updateSlide();
+
+}
+
+window.onclick = function(event){
+
+  const modal =
+  document.getElementById("projectModal");
+
+  if(event.target === modal){
+    closeProject();
+  }
+
+}
+function openCertificate(image){
+
+  document.getElementById("certImage")
+  .src = image;
+
+  document.getElementById("certModal")
+  .style.display = "flex";
+
+}
+
+function closeCertificate(){
+
+  document.getElementById("certModal")
+  .style.display = "none";
+
+}
 </script>
+<div id="projectModal" class="modal">
+  <span class="close-modal"
+  onclick="closeProject()">&times;</span>
+  <div class="modal-content">
+    <div class="slider-container">
+      <button class="slider-btn left"
+      onclick="prevSlide()">❮</button>
+      <img id="sliderImage">
+      <button class="slider-btn right"
+      onclick="nextSlide()">❯</button>
+    </div>
+
+    <div class="modal-body">
+      <h2 id="projectTitle"></h2>
+      <p id="projectTech"></p>
+      <br>
+      <p id="projectDesc"></p>
+    </div>
+  </div>
+</div>
+<div id="certModal" class="modal">
+  <span class="close-modal"
+  onclick="closeCertificate()">&times;</span>
+  <div class="modal-content cert-content">
+    <img id="certImage">
+  </div>
+</div>
 </body>
 </html>
